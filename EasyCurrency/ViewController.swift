@@ -29,6 +29,10 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        navigationItem.title = "EasyCurrency"
+    }
+    
     //    MARK: Actions
     
     @IBAction func SubmitBtn(_ sender: UIButton) {
