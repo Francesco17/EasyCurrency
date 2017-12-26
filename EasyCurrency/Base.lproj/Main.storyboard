@@ -65,6 +65,8 @@
                     </view>
                     <connections>
                         <outlet property="nameTextField" destination="0Bx-mb-Hbw" id="1Fk-zf-2IR"/>
+                        <outlet property="passLabel" destination="S5F-z1-EMN" id="ebn-MH-N8v"/>
+                        <outlet property="passwTextfield" destination="ncb-Ca-kSm" id="eCr-Ve-PSj"/>
                         <outlet property="userNameLabel" destination="3Ul-gi-VOT" id="4YY-mJ-5Mt"/>
                     </connections>
                 </viewController>
