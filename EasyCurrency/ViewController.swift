@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 
 class ViewController: UIViewController {
     
@@ -52,7 +53,24 @@ class ViewController: UIViewController {
             }
             
             let responseString = String(data: data, encoding: .utf8)
-            print("responseString = \(String(describing: responseString))")
+            let responseString2 = responseString?.data(using:.utf8)!
+//            print("responseString = \(String(describing: responseString))")
+            do{
+                let json = try JSONSerialization.jsonObject(with: responseString2!)
+                if let dictionary = json as? [String: Any]{
+                    if let state = dictionary["state"] as? String{
+                        if state == "SUCCESS" {
+                            let cookie = dictionary["cookie"] as? String
+                            print(cookie!)
+                        }
+                    }
+                }
+                
+            }
+            catch {
+                print("Error parsing Json")
+            }
+           
         }
         task.resume()
         
