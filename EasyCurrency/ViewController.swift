@@ -66,6 +66,9 @@ class ViewController: UIViewController {
                         if state == "SUCCESS" {
                             let cookie = dictionary["cookie"] as? String
                             print(cookie!)
+                            OperationQueue.main.addOperation {
+                                self.performSegue(withIdentifier: "loginSuccess", sender: self)
+                            }
                         }
                         else if state == "FAIL" {
                             var error_Message = ""

@@ -81,11 +81,27 @@
                         <outlet property="passLabel" destination="S5F-z1-EMN" id="ebn-MH-N8v"/>
                         <outlet property="passwTextfield" destination="ncb-Ca-kSm" id="eCr-Ve-PSj"/>
                         <outlet property="userNameLabel" destination="3Ul-gi-VOT" id="4YY-mJ-5Mt"/>
+                        <segue destination="AUt-We-gg4" kind="show" identifier="loginSuccess" id="2A7-XU-d9e"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="260" y="133.5832083958021"/>
+        </scene>
+        <!--Second View Controller-->
+        <scene sceneID="E9T-mq-CdQ">
+            <objects>
+                <viewController id="AUt-We-gg4" customClass="SecondViewController" customModule="EasyCurrency" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ItI-DW-grT">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="1dt-Qc-sV3"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gXJ-Sb-2ie" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1380" y="122"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="fbH-pb-tTm">
