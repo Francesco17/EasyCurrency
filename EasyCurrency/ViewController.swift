@@ -63,6 +63,24 @@ class ViewController: UIViewController {
                             let cookie = dictionary["cookie"] as? String
                             print(cookie!)
                         }
+                        else if state == "FAIL" {
+                            var error_Message = ""
+                            if let cause = dictionary["cause"] as? String{
+                                if cause == "wrong user"{
+                                    error_Message = "Username is wrong! Try again.."
+                                }
+                                else {
+                                    error_Message = "Password is wrong! Try again.."
+                                }
+                            }
+                            DispatchQueue.main.async {
+                                let alertController = UIAlertController(title: "ERROR", message: error_Message, preferredStyle: UIAlertControllerStyle.alert)
+
+                                alertController.addAction(UIAlertAction(title: "Ok", style:UIAlertActionStyle.default, handler:nil))
+                                
+                                self.present(alertController, animated: true, completion: nil)
+                            }
+                        }
                     }
                 }
                 
