@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		139106DF1FF2E21700FBC97C /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139106DE1FF2E21700FBC97C /* SecondViewController.swift */; };
+		13BBB8251FF3964F0099C835 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13BBB8241FF3964F0099C835 /* RegistrationViewController.swift */; };
 		13F8AB1D1FEFC33500E9093F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F8AB1C1FEFC33500E9093F /* AppDelegate.swift */; };
 		13F8AB1F1FEFC33500E9093F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F8AB1E1FEFC33500E9093F /* ViewController.swift */; };
 		13F8AB221FEFC33500E9093F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13F8AB201FEFC33500E9093F /* Main.storyboard */; };
@@ -36,6 +37,7 @@
 
 /* Begin PBXFileReference section */
 		139106DE1FF2E21700FBC97C /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
+		13BBB8241FF3964F0099C835 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		13F8AB191FEFC33500E9093F /* EasyCurrency.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EasyCurrency.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13F8AB1C1FEFC33500E9093F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		13F8AB1E1FEFC33500E9093F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 				13F8AB231FEFC33500E9093F /* Assets.xcassets */,
 				13F8AB251FEFC33500E9093F /* LaunchScreen.storyboard */,
 				13F8AB281FEFC33500E9093F /* Info.plist */,
+				13BBB8241FF3964F0099C835 /* RegistrationViewController.swift */,
 			);
 			path = EasyCurrency;
 			sourceTree = "<group>";
@@ -264,6 +267,7 @@
 			files = (
 				139106DF1FF2E21700FBC97C /* SecondViewController.swift in Sources */,
 				13F8AB1F1FEFC33500E9093F /* ViewController.swift in Sources */,
+				13BBB8251FF3964F0099C835 /* RegistrationViewController.swift in Sources */,
 				13F8AB1D1FEFC33500E9093F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
