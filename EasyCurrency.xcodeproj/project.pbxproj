@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		139106DF1FF2E21700FBC97C /* FirstItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139106DE1FF2E21700FBC97C /* FirstItem.swift */; };
+		1301AD411FF4F5B200944028 /* ExchangeItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1301AD401FF4F5B200944028 /* ExchangeItem.swift */; };
+		1301AD431FF4F5C500944028 /* WalletItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1301AD421FF4F5C500944028 /* WalletItem.swift */; };
+		139106DF1FF2E21700FBC97C /* MapsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139106DE1FF2E21700FBC97C /* MapsItem.swift */; };
 		13BBB8251FF3964F0099C835 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13BBB8241FF3964F0099C835 /* RegistrationViewController.swift */; };
 		13F8AB1D1FEFC33500E9093F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F8AB1C1FEFC33500E9093F /* AppDelegate.swift */; };
 		13F8AB1F1FEFC33500E9093F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F8AB1E1FEFC33500E9093F /* ViewController.swift */; };
@@ -36,7 +38,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		139106DE1FF2E21700FBC97C /* FirstItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstItem.swift; sourceTree = "<group>"; };
+		1301AD401FF4F5B200944028 /* ExchangeItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeItem.swift; sourceTree = "<group>"; };
+		1301AD421FF4F5C500944028 /* WalletItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletItem.swift; sourceTree = "<group>"; };
+		139106DE1FF2E21700FBC97C /* MapsItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapsItem.swift; sourceTree = "<group>"; };
 		13BBB8241FF3964F0099C835 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		13F8AB191FEFC33500E9093F /* EasyCurrency.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EasyCurrency.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13F8AB1C1FEFC33500E9093F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -103,7 +107,9 @@
 			children = (
 				13F8AB1C1FEFC33500E9093F /* AppDelegate.swift */,
 				13F8AB1E1FEFC33500E9093F /* ViewController.swift */,
-				139106DE1FF2E21700FBC97C /* FirstItem.swift */,
+				139106DE1FF2E21700FBC97C /* MapsItem.swift */,
+				1301AD401FF4F5B200944028 /* ExchangeItem.swift */,
+				1301AD421FF4F5C500944028 /* WalletItem.swift */,
 				13F8AB201FEFC33500E9093F /* Main.storyboard */,
 				13F8AB231FEFC33500E9093F /* Assets.xcassets */,
 				13F8AB251FEFC33500E9093F /* LaunchScreen.storyboard */,
@@ -265,7 +271,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				139106DF1FF2E21700FBC97C /* FirstItem.swift in Sources */,
+				139106DF1FF2E21700FBC97C /* MapsItem.swift in Sources */,
+				1301AD431FF4F5C500944028 /* WalletItem.swift in Sources */,
+				1301AD411FF4F5B200944028 /* ExchangeItem.swift in Sources */,
 				13F8AB1F1FEFC33500E9093F /* ViewController.swift in Sources */,
 				13BBB8251FF3964F0099C835 /* RegistrationViewController.swift in Sources */,
 				13F8AB1D1FEFC33500E9093F /* AppDelegate.swift in Sources */,

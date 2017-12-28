@@ -275,20 +275,44 @@
         <!--EasyCurrency-->
         <scene sceneID="zmn-Ff-goA">
             <objects>
-                <viewController id="26Q-K7-VAZ" sceneMemberID="viewController">
+                <viewController id="26Q-K7-VAZ" customClass="MapsItem" customModule="EasyCurrency" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="HzK-hP-Cyj">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="GOx-oo-cll">
+                                <rect key="frame" x="0.0" y="116" width="375" height="502"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="Hrn-dy-owr" appends="YES" id="kCz-Wu-zjI"/>
+                                </connections>
+                            </mapView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="GOx-oo-cll" firstAttribute="trailing" secondItem="d1k-v5-EJ7" secondAttribute="trailing" id="0CR-vT-463"/>
+                            <constraint firstItem="GOx-oo-cll" firstAttribute="leading" secondItem="d1k-v5-EJ7" secondAttribute="leading" id="Qqs-M3-dTE"/>
+                            <constraint firstItem="GOx-oo-cll" firstAttribute="bottom" secondItem="d1k-v5-EJ7" secondAttribute="bottom" id="WXE-xO-8LV"/>
+                            <constraint firstItem="GOx-oo-cll" firstAttribute="top" secondItem="d1k-v5-EJ7" secondAttribute="top" id="twr-dI-eGZ"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="d1k-v5-EJ7"/>
                     </view>
                     <navigationItem key="navigationItem" title="EasyCurrency" id="mTR-sE-xPz">
                         <barButtonItem key="leftBarButtonItem" title="Logout" id="j9d-td-JHO"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="mapView" destination="GOx-oo-cll" id="2IC-NT-zav"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2AS-dj-K1a" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="Hrn-dy-owr">
+                    <connections>
+                        <action selector="handleTap:" destination="26Q-K7-VAZ" id="Ol9-Lc-l2r"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="3062" y="-899"/>
+            <point key="canvasLocation" x="3061.5999999999999" y="-899.10044977511257"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="fbH-pb-tTm">

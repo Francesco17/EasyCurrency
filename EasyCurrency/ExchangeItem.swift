@@ -1,14 +1,14 @@
 //
-//  SecondViewController.swift
+//  ExchangeItem.swift
 //  EasyCurrency
 //
-//  Created by Francesco Fuggitti on 26/12/2017.
+//  Created by Francesco Fuggitti on 28/12/2017.
 //  Copyright © 2017 Francesco Fuggitti. All rights reserved.
 //
 
 import UIKit
 
-class SecondViewController: UIViewController {
+class ExchangeItem: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
