@@ -27,19 +27,16 @@ class MapsItem: UIViewController {
     
     @IBAction func handleTap(_ sender: UITapGestureRecognizer) {
         
+        var countryLabel = ""
+        
         if sender.state == .ended {
             let location = sender.location(in: mapView)
-//            print("**********tapped********")
-//            print(location)
             
             let locationCoord = mapView.convert(location, toCoordinateFrom: mapView)
-//            print(locationCoord)
-            
+
             let geoCoder = CLGeocoder()
             let loc = CLLocation(latitude: locationCoord.latitude, longitude: locationCoord.longitude)
             geoCoder.reverseGeocodeLocation(loc, completionHandler: { (placemarks, error) in
-
-                var countryLabel = ""
 
                 if (error != nil) {
                     print("Unable to Reverse Geocode Location (\(String(describing: error)))")
@@ -57,18 +54,62 @@ class MapsItem: UIViewController {
                         countryLabel = "No Matching Addresses Found"
                     }
                 }
-//                print(countryLabel)
+                
             })
+            
+//            func getCurrency(countryLabel: String, completion: (result: String) -> ()){
+                var countryCurrency = ""
+                let url = URL(string: "https://restcountries.eu/rest/v2/alpha/"+countryLabel)!
+                print(url)
+                
+                let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+                    
+                    if error != nil {
+                        print("HTTP request error")
+                    }
+                    else{
+                        do{
+                            let json = try JSONSerialization.jsonObject(with: data!)
+                            if let dictResponse = json as? [String:Any] {
+                                
+                                if let currencies = dictResponse["currencies"] as? [[String:Any]]{
+                                    
+                                    if currencies.first!["name"] != nil{
+                                        countryCurrency = currencies.first!["name"]! as! String
+                                        print(countryCurrency)
+                                    }
+                                    else{
+                                        
+                                    }
+                                }
+                            }
+                        }catch {
+                            print("Error parsing Json")
+                            countryCurrency = countryLabel
+                        }
+                    }
+                    
+                }
+                task.resume()
+                completion(result:)
+                
+//            }
+            
+//            func loaderCurrency(result: String){
+                self.mapView.removeAnnotations(self.mapView.annotations)
+                let locat:CLLocationCoordinate2D = CLLocationCoordinate2DMake(locationCoord.latitude, locationCoord.longitude)
+                let annotation = MKPointAnnotation()
+                annotation.coordinate = locat
+                annotation.title = countryCurrency
+                print("titolo immesso: "+countryCurrency)
+                //                annotation.subtitle = ""
+                self.mapView.addAnnotation(annotation)
+//            }
+            
             
         }
         
     }
-    
-        // Add annotation:
-//        let annotation = MKPointAnnotation()
-//        annotation.coordinate = coordinate
-//        mapView.addAnnotation(annotation)
-
     
 
 }
