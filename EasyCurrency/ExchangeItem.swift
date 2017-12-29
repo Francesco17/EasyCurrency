@@ -88,13 +88,26 @@ class ExchangeItem: UIViewController {
             task.resume()
         }
         
-        getRates(selCurrencyFrom: selCurrencyFrom, selCurrencyTo: selCurrencyTo){ rate in
-            
-            DispatchQueue.main.async {
-                let result =  Double(self.valueFrom.text!)!*rate
-                self.valueTo.text = String(result)
+        if self.valueFrom.text != "" {
+            getRates(selCurrencyFrom: selCurrencyFrom, selCurrencyTo: selCurrencyTo){ rate in
+                
+                DispatchQueue.main.async {
+                    let result =  Double(self.valueFrom.text!)!*rate
+                    self.valueTo.text = String(result)
+                }
             }
         }
+        else{
+            DispatchQueue.main.async {
+                let alertController = UIAlertController(title: "ERROR", message: "Insert a value", preferredStyle: UIAlertControllerStyle.alert)
+                
+                alertController.addAction(UIAlertAction(title: "Ok", style:UIAlertActionStyle.default, handler:nil))
+                
+                self.present(alertController, animated: true, completion: nil)
+            }
+        }
+        
+
         
     }
     
