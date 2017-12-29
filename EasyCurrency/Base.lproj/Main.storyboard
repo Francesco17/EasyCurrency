@@ -256,9 +256,9 @@
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="go" enablesReturnKeyAutomatically="YES"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jAl-0S-Dxl">
+                            <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jAl-0S-Dxl">
                                 <rect key="frame" x="238" y="473" width="97" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="97" id="aPe-F9-gZm"/>
@@ -267,6 +267,14 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dKg-Ik-i3H">
+                                <rect key="frame" x="161" y="550" width="53" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Change"/>
+                                <connections>
+                                    <action selector="changeBtn:" destination="HGU-vK-qfV" eventType="touchUpInside" id="27C-LY-ciY"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -303,7 +311,11 @@
                         <viewLayoutGuide key="safeArea" id="OSg-zv-zYV"/>
                     </view>
                     <navigationItem key="navigationItem" title="EasyCurrency" id="74M-fw-aE6">
-                        <barButtonItem key="leftBarButtonItem" title="Logout" id="2U7-HZ-Ugx"/>
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="2U7-HZ-Ugx">
+                            <connections>
+                                <action selector="logoutBtn:" destination="HGU-vK-qfV" id="NcA-Gr-A5L"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="currencyFrom" destination="4sT-Sj-YLU" id="dRJ-uO-sg4"/>

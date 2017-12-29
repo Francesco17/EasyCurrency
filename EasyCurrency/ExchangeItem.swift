@@ -17,8 +17,8 @@ class ExchangeItem: UIViewController {
     @IBOutlet weak var valueTo: UITextField!
     
     var currencyData: [String] = [String]()
-    var selCurrencyFrom: String?
-    var selCurrencyTo: String?
+    var selCurrencyFrom = ""
+    var selCurrencyTo = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,15 +34,77 @@ class ExchangeItem: UIViewController {
         
         currencyFrom.selectRow(8, inComponent: 0, animated: true)
         currencyTo.selectRow(30, inComponent: 0, animated: true)
+        
+        selCurrencyFrom = currencyData[currencyFrom.selectedRow(inComponent: 0)]
+        selCurrencyTo = currencyData[currencyTo.selectedRow(inComponent: 0)]
+        
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+        
+    @IBAction func changeBtn(_ sender: UIButton) {
+        
+        var rate = Double(1)
+        
+        func getRates(selCurrencyFrom: String, selCurrencyTo: String, completion: @escaping (Double)->()){
+//            print("FROM: "+selCurrencyFrom)
+//            print("TO: "+selCurrencyTo)
+            
+            let url = URL(string: "https://api.fixer.io/latest?base="+selCurrencyFrom+"&symbols="+selCurrencyTo)
+//            print(url!)
+            
+            let task = URLSession.shared.dataTask(with: url!) { (data, response, error) in
+                
+                if error != nil {
+                    print("HTTP request error")
+                }
+                else{
+                    do{
+                        let json = try JSONSerialization.jsonObject(with: data!)
+                        if let dictResponse = json as? [String:Any] {
+                            
+                            if let currencies = dictResponse["rates"] as? [String:Any]{
+                                
+                                if currencies[self.selCurrencyTo] != nil {
+                                    rate = (currencies[self.selCurrencyTo] as? Double)!
+//                                    print(rate)
+                                    
+                                }
+                                else{
+                                    print("Rate not present")
+                                }
+                            }
+                        }
+                    }catch {
+                        print("Error parsing Json")
+                    }
+                }
+                completion(rate)
+            }
+            task.resume()
+        }
+        
+        getRates(selCurrencyFrom: selCurrencyFrom, selCurrencyTo: selCurrencyTo){ rate in
+            
+            DispatchQueue.main.async {
+                let result =  Double(self.valueFrom.text!)!*rate
+                self.valueTo.text = String(result)
+            }
+        }
+        
+    }
     
+    @IBAction func logoutBtn(_ sender: UIBarButtonItem) {
+        OperationQueue.main.addOperation {
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
     
-    
+
 
 }
 
@@ -67,11 +129,11 @@ extension ExchangeItem: UIPickerViewDelegate, UIPickerViewDataSource{
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if pickerView == currencyFrom{
             selCurrencyFrom = currencyData[row]
-            print("currency from = "+selCurrencyFrom!)
+//            print("currency from = "+selCurrencyFrom)
         }
         else{
             selCurrencyTo = currencyData[row]
-            print("currency to = "+selCurrencyTo!)
+//            print("currency to = "+selCurrencyTo)
         }
         
     }
