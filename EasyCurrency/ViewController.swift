@@ -8,6 +8,7 @@
 
 import UIKit
 import Foundation
+import LocalAuthentication
 
 class ViewController: UIViewController {
     
@@ -23,6 +24,11 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        touchIdAuthentication()
     }
 
     override func didReceiveMemoryWarning() {
@@ -101,6 +107,49 @@ class ViewController: UIViewController {
         task.resume()
         
     }
+    
+    func touchIdAuthentication(){
+        let myContext = LAContext()
+        let myLocalizedReasonString = "Get rid of typing username and password!!"
+        
+        var authError: NSError?
+        if #available(iOS 8.0, macOS 10.12.1, *) {
+            if myContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &authError) {
+                myContext.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: myLocalizedReasonString) { success, evaluateError in
+                    if success {
+                        // User authenticated successfully, take appropriate action
+                        OperationQueue.main.addOperation {
+                            self.performSegue(withIdentifier: "loginSuccess", sender: self)
+                        }
+                    } else {
+                        // User did not authenticate successfully, look at error and take appropriate action
+                        DispatchQueue.main.async {
+                            let alertController = UIAlertController(title: "ERROR", message: "Fingerprint not identified", preferredStyle: UIAlertControllerStyle.alert)
+                            alertController.addAction(UIAlertAction(title: "Ok", style:UIAlertActionStyle.default, handler:nil))
+                            self.present(alertController, animated: true, completion: nil)
+                        }
+                    }
+                }
+            } else {
+                // Could not evaluate policy; look at authError and present an appropriate message to user
+                DispatchQueue.main.async {
+                    let alertController = UIAlertController(title: "ERROR", message: "Authentication Error", preferredStyle: UIAlertControllerStyle.alert)
+                    alertController.addAction(UIAlertAction(title: "Ok", style:UIAlertActionStyle.default, handler:nil))
+                    self.present(alertController, animated: true, completion: nil)
+                }
+            }
+        } else {
+            // Fallback on earlier versions
+            DispatchQueue.main.async {
+                let alertController = UIAlertController(title: "ERROR", message: "Touch ID not recognized", preferredStyle: UIAlertControllerStyle.alert)
+                alertController.addAction(UIAlertAction(title: "Ok", style:UIAlertActionStyle.default, handler:nil))
+                self.present(alertController, animated: true, completion: nil)
+            }
+            
+        }
+    }
+    
+    
     
     
 }
