@@ -58,7 +58,6 @@
                                         <state key="normal" title="Login"/>
                                         <connections>
                                             <action selector="SubmitBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nxO-Cb-C7Q"/>
-                                            <segue destination="0eZ-yA-lEs" kind="presentation" identifier="loginSuccess" id="ceY-Ho-TIL"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="70i-DV-gwo">
@@ -101,6 +100,7 @@
                         <outlet property="passLabel" destination="S5F-z1-EMN" id="ebn-MH-N8v"/>
                         <outlet property="passwTextfield" destination="ncb-Ca-kSm" id="eCr-Ve-PSj"/>
                         <outlet property="userNameLabel" destination="3Ul-gi-VOT" id="4YY-mJ-5Mt"/>
+                        <segue destination="0eZ-yA-lEs" kind="presentation" identifier="loginSuccess" id="zfA-M5-zXh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -291,10 +291,10 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="GOx-oo-cll" firstAttribute="trailing" secondItem="d1k-v5-EJ7" secondAttribute="trailing" id="0CR-vT-463"/>
-                            <constraint firstItem="GOx-oo-cll" firstAttribute="leading" secondItem="d1k-v5-EJ7" secondAttribute="leading" id="Qqs-M3-dTE"/>
-                            <constraint firstItem="GOx-oo-cll" firstAttribute="bottom" secondItem="d1k-v5-EJ7" secondAttribute="bottom" id="WXE-xO-8LV"/>
-                            <constraint firstItem="GOx-oo-cll" firstAttribute="top" secondItem="d1k-v5-EJ7" secondAttribute="top" id="twr-dI-eGZ"/>
+                            <constraint firstItem="GOx-oo-cll" firstAttribute="leading" secondItem="d1k-v5-EJ7" secondAttribute="leading" id="7zf-GB-JTv"/>
+                            <constraint firstItem="GOx-oo-cll" firstAttribute="top" secondItem="d1k-v5-EJ7" secondAttribute="top" id="jUs-rY-Ul0"/>
+                            <constraint firstItem="d1k-v5-EJ7" firstAttribute="trailing" secondItem="GOx-oo-cll" secondAttribute="trailing" id="kBl-cX-zxv"/>
+                            <constraint firstItem="GOx-oo-cll" firstAttribute="bottom" secondItem="d1k-v5-EJ7" secondAttribute="bottom" id="qke-Gd-AKE"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="d1k-v5-EJ7"/>
                     </view>

@@ -55,58 +55,65 @@ class MapsItem: UIViewController {
                     }
                 }
                 
-            })
-            
-//            func getCurrency(countryLabel: String, completion: (result: String) -> ()){
+//                print(countryLabel)
                 var countryCurrency = ""
-                let url = URL(string: "https://restcountries.eu/rest/v2/alpha/"+countryLabel)!
-                print(url)
                 
-                let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+                func countryRequest(countryLabel: String, completion: @escaping (String)->()){
+                    let url = URL(string: "https://restcountries.eu/rest/v2/alpha/"+countryLabel)!
+//                    print(url)
                     
-                    if error != nil {
-                        print("HTTP request error")
-                    }
-                    else{
-                        do{
-                            let json = try JSONSerialization.jsonObject(with: data!)
-                            if let dictResponse = json as? [String:Any] {
-                                
-                                if let currencies = dictResponse["currencies"] as? [[String:Any]]{
+                    let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+                        
+                        if error != nil {
+                            print("HTTP request error")
+                        }
+                        else{
+                            do{
+                                let json = try JSONSerialization.jsonObject(with: data!)
+                                if let dictResponse = json as? [String:Any] {
                                     
-                                    if currencies.first!["name"] != nil{
-                                        countryCurrency = currencies.first!["name"]! as! String
-                                        print(countryCurrency)
-                                    }
-                                    else{
+                                    if let currencies = dictResponse["currencies"] as? [[String:Any]]{
                                         
+                                        if currencies.first!["name"] != nil{
+                                            countryCurrency = currencies.first!["name"]! as! String
+//                                            print(countryCurrency)
+                                            
+                                        }
+                                        else{
+                                            print("Currency not present")
+                                        }
                                     }
                                 }
+                            }catch {
+                                print("Error parsing Json")
+                                countryCurrency = countryLabel
                             }
-                        }catch {
-                            print("Error parsing Json")
-                            countryCurrency = countryLabel
+                            
                         }
+                        completion(countryCurrency)
+                    }
+                    task.resume()
+                    
+                }
+                
+                countryRequest(countryLabel: countryLabel){ countryCurrency in
+
+                    DispatchQueue.main.async {
+                        self.mapView.removeAnnotations(self.mapView.annotations)
+                        let locat:CLLocationCoordinate2D = CLLocationCoordinate2DMake(locationCoord.latitude, locationCoord.longitude)
+                        let annotation = MKPointAnnotation()
+                        annotation.coordinate = locat
+                        annotation.title = countryCurrency
+//                        print("titolo immesso: "+countryCurrency)
+                        //                annotation.subtitle = ""
+                        self.mapView.addAnnotation(annotation)
                     }
                     
                 }
-                task.resume()
-                completion(result:)
+
                 
-//            }
-            
-//            func loaderCurrency(result: String){
-                self.mapView.removeAnnotations(self.mapView.annotations)
-                let locat:CLLocationCoordinate2D = CLLocationCoordinate2DMake(locationCoord.latitude, locationCoord.longitude)
-                let annotation = MKPointAnnotation()
-                annotation.coordinate = locat
-                annotation.title = countryCurrency
-                print("titolo immesso: "+countryCurrency)
-                //                annotation.subtitle = ""
-                self.mapView.addAnnotation(annotation)
-//            }
-            
-            
+            })
+
         }
         
     }
