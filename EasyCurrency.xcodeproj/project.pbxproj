@@ -107,6 +107,7 @@
 			children = (
 				13F8AB1C1FEFC33500E9093F /* AppDelegate.swift */,
 				13F8AB1E1FEFC33500E9093F /* ViewController.swift */,
+				13BBB8241FF3964F0099C835 /* RegistrationViewController.swift */,
 				139106DE1FF2E21700FBC97C /* MapsItem.swift */,
 				1301AD401FF4F5B200944028 /* ExchangeItem.swift */,
 				1301AD421FF4F5C500944028 /* WalletItem.swift */,
@@ -114,7 +115,6 @@
 				13F8AB231FEFC33500E9093F /* Assets.xcassets */,
 				13F8AB251FEFC33500E9093F /* LaunchScreen.storyboard */,
 				13F8AB281FEFC33500E9093F /* Info.plist */,
-				13BBB8241FF3964F0099C835 /* RegistrationViewController.swift */,
 			);
 			path = EasyCurrency;
 			sourceTree = "<group>";

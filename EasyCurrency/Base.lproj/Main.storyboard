@@ -299,7 +299,11 @@
                         <viewLayoutGuide key="safeArea" id="d1k-v5-EJ7"/>
                     </view>
                     <navigationItem key="navigationItem" title="EasyCurrency" id="mTR-sE-xPz">
-                        <barButtonItem key="leftBarButtonItem" title="Logout" id="j9d-td-JHO"/>
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="j9d-td-JHO">
+                            <connections>
+                                <action selector="logoutAct:" destination="26Q-K7-VAZ" id="Hdf-oz-W6j"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="mapView" destination="GOx-oo-cll" id="2IC-NT-zav"/>
