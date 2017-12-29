@@ -277,6 +277,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FT5-ha-Tak">
                                 <rect key="frame" x="174" y="321" width="26" height="25"/>
                                 <state key="normal" title="B" image="invert-25"/>
+                                <connections>
+                                    <action selector="invertBtn:" destination="HGU-vK-qfV" eventType="touchUpInside" id="g9c-ei-6R4"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -328,6 +331,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="button_change" destination="dKg-Ik-i3H" id="mMH-Pe-YsS"/>
                         <outlet property="currencyFrom" destination="4sT-Sj-YLU" id="dRJ-uO-sg4"/>
                         <outlet property="currencyTo" destination="4C5-Bt-XSE" id="2gP-NU-TmQ"/>
                         <outlet property="valueFrom" destination="3Uk-Gd-6NY" id="oBV-sL-d9z"/>

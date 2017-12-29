@@ -16,6 +16,8 @@ class ExchangeItem: UIViewController {
     @IBOutlet weak var currencyTo: UIPickerView!
     @IBOutlet weak var valueTo: UITextField!
     
+    @IBOutlet weak var button_change: UIButton!
+    
     var currencyData: [String] = [String]()
     var selCurrencyFrom = ""
     var selCurrencyTo = ""
@@ -110,6 +112,24 @@ class ExchangeItem: UIViewController {
 
         
     }
+    
+    @IBAction func invertBtn(_ sender: UIButton) {
+        
+        let indice_from = currencyFrom.selectedRow(inComponent: 0)
+        let indice_to = currencyTo.selectedRow(inComponent: 0)
+        
+        currencyFrom.selectRow(indice_to, inComponent: 0, animated: true)
+        currencyFrom.reloadAllComponents()
+        
+        currencyTo.selectRow(indice_from, inComponent: 0, animated: true)
+        currencyTo.reloadAllComponents()
+        
+        selCurrencyFrom = currencyData[currencyFrom.selectedRow(inComponent: 0)]
+        selCurrencyTo = currencyData[currencyTo.selectedRow(inComponent: 0)]
+        
+        button_change.sendActions(for: .touchUpInside)
+    }
+    
     
     @IBAction func logoutBtn(_ sender: UIBarButtonItem) {
         OperationQueue.main.addOperation {
