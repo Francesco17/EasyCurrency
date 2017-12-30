@@ -132,11 +132,11 @@ class ViewController: UIViewController {
                 }
             } else {
                 // Could not evaluate policy; look at authError and present an appropriate message to user
-                DispatchQueue.main.async {
-                    let alertController = UIAlertController(title: "ERROR", message: "Authentication Error", preferredStyle: UIAlertControllerStyle.alert)
-                    alertController.addAction(UIAlertAction(title: "Ok", style:UIAlertActionStyle.default, handler:nil))
-                    self.present(alertController, animated: true, completion: nil)
-                }
+//                DispatchQueue.main.async {
+//                    let alertController = UIAlertController(title: "ERROR", message: "Authentication Error", preferredStyle: UIAlertControllerStyle.alert)
+//                    alertController.addAction(UIAlertAction(title: "Ok", style:UIAlertActionStyle.default, handler:nil))
+//                    self.present(alertController, animated: true, completion: nil)
+//                }
             }
         } else {
             // Fallback on earlier versions

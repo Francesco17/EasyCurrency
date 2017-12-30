@@ -14,10 +14,16 @@ class MapsItem: UIViewController {
     
     @IBOutlet weak var mapView: MKMapView!
     
+    var isTappingNow = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
+        self.mapView.delegate = self
+        
+        let singleTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
+        mapView.addGestureRecognizer(singleTapRecognizer)
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -25,8 +31,10 @@ class MapsItem: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func handleTap(_ sender: UITapGestureRecognizer) {
-        
+//    @IBAction func handleTap(_ sender: UITapGestureRecognizer) {
+    
+    @objc func handleTap(_ sender: UITapGestureRecognizer){
+    
         var countryLabel = ""
         
         if sender.state == .ended {
@@ -76,7 +84,6 @@ class MapsItem: UIViewController {
                                         
                                         if currencies.first!["name"] != nil{
                                             countryCurrency = currencies.first!["name"]! as! String
-//                                            print(countryCurrency)
                                             
                                         }
                                         else{
@@ -99,14 +106,17 @@ class MapsItem: UIViewController {
                 countryRequest(countryLabel: countryLabel){ countryCurrency in
 
                     DispatchQueue.main.async {
+                        self.isTappingNow = true
                         self.mapView.removeAnnotations(self.mapView.annotations)
                         let locat:CLLocationCoordinate2D = CLLocationCoordinate2DMake(locationCoord.latitude, locationCoord.longitude)
                         let annotation = MKPointAnnotation()
                         annotation.coordinate = locat
                         annotation.title = countryCurrency
-//                        print("titolo immesso: "+countryCurrency)
-                        //                annotation.subtitle = ""
+                        annotation.subtitle = "subtitle"
                         self.mapView.addAnnotation(annotation)
+                        self.mapView.selectAnnotation(annotation, animated: true)
+                        self.isTappingNow = false
+                        
                     }
                     
                 }
@@ -127,4 +137,33 @@ class MapsItem: UIViewController {
     
     
 
+}
+
+extension MapsItem: MKMapViewDelegate {
+
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+
+        if !(annotation is MKPointAnnotation){
+            return nil
+        }
+
+        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "pin")
+        if annotationView == nil {
+            annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "pin")
+            annotationView!.canShowCallout = true
+            annotationView!.sizeToFit()
+        }
+        else{
+            annotationView!.annotation = annotation
+        }
+
+        return annotationView
+
+    }
+    
+    func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
+        if !isTappingNow {
+            self.mapView.selectAnnotation(view.annotation!, animated: false)
+        }
+    }
 }
