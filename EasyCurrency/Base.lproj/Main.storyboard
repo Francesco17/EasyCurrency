@@ -391,9 +391,6 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="GOx-oo-cll">
                                 <rect key="frame" x="0.0" y="116" width="375" height="502"/>
                                 <gestureRecognizers/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="Hrn-dy-owr" appends="YES" id="kCz-Wu-zjI"/>
-                                </connections>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -418,11 +415,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2AS-dj-K1a" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="Hrn-dy-owr">
-                    <connections>
-                        <action selector="handleTap:" destination="26Q-K7-VAZ" id="Ol9-Lc-l2r"/>
-                    </connections>
-                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="3061.5999999999999" y="-899.10044977511257"/>
         </scene>

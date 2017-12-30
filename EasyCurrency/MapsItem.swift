@@ -19,6 +19,7 @@ class MapsItem: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
         self.mapView.delegate = self
         
         let singleTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
@@ -30,8 +31,6 @@ class MapsItem: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-//    @IBAction func handleTap(_ sender: UITapGestureRecognizer) {
     
     @objc func handleTap(_ sender: UITapGestureRecognizer){
     
