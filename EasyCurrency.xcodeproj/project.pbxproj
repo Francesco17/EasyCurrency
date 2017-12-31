@@ -12,6 +12,7 @@
 		135DDB7C1FF6C78200699A66 /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 135DDB7B1FF6C78100699A66 /* LocalAuthentication.framework */; };
 		139106DF1FF2E21700FBC97C /* MapsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139106DE1FF2E21700FBC97C /* MapsItem.swift */; };
 		13BBB8251FF3964F0099C835 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13BBB8241FF3964F0099C835 /* RegistrationViewController.swift */; };
+		13CD41991FF93A28006F8A82 /* EasyCurrency.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 13CD41971FF93A28006F8A82 /* EasyCurrency.xcdatamodeld */; };
 		13F8AB1D1FEFC33500E9093F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F8AB1C1FEFC33500E9093F /* AppDelegate.swift */; };
 		13F8AB1F1FEFC33500E9093F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F8AB1E1FEFC33500E9093F /* ViewController.swift */; };
 		13F8AB221FEFC33500E9093F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13F8AB201FEFC33500E9093F /* Main.storyboard */; };
@@ -44,6 +45,7 @@
 		135DDB7B1FF6C78100699A66 /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
 		139106DE1FF2E21700FBC97C /* MapsItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapsItem.swift; sourceTree = "<group>"; };
 		13BBB8241FF3964F0099C835 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
+		13CD41981FF93A28006F8A82 /* EasyCurrency.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = EasyCurrency.xcdatamodel; sourceTree = "<group>"; };
 		13F8AB191FEFC33500E9093F /* EasyCurrency.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EasyCurrency.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13F8AB1C1FEFC33500E9093F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		13F8AB1E1FEFC33500E9093F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 				13F8AB231FEFC33500E9093F /* Assets.xcassets */,
 				13F8AB251FEFC33500E9093F /* LaunchScreen.storyboard */,
 				13F8AB281FEFC33500E9093F /* Info.plist */,
+				13CD41971FF93A28006F8A82 /* EasyCurrency.xcdatamodeld */,
 			);
 			path = EasyCurrency;
 			sourceTree = "<group>";
@@ -284,6 +287,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				139106DF1FF2E21700FBC97C /* MapsItem.swift in Sources */,
+				13CD41991FF93A28006F8A82 /* EasyCurrency.xcdatamodeld in Sources */,
 				1301AD431FF4F5C500944028 /* WalletItem.swift in Sources */,
 				1301AD411FF4F5B200944028 /* ExchangeItem.swift in Sources */,
 				13F8AB1F1FEFC33500E9093F /* ViewController.swift in Sources */,
@@ -582,6 +586,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		13CD41971FF93A28006F8A82 /* EasyCurrency.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				13CD41981FF93A28006F8A82 /* EasyCurrency.xcdatamodel */,
+			);
+			currentVersion = 13CD41981FF93A28006F8A82 /* EasyCurrency.xcdatamodel */;
+			path = EasyCurrency.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 13F8AB111FEFC33500E9093F /* Project object */;
 }
