@@ -338,15 +338,31 @@
         <!--EasyCurrency-->
         <scene sceneID="A1P-H8-Cm3">
             <objects>
-                <viewController id="Z4D-Gi-tWX" sceneMemberID="viewController">
+                <viewController id="Z4D-Gi-tWX" customClass="WalletItem" customModule="EasyCurrency" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Kvt-KT-1NF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="kYR-hp-q4f">
+                                <rect key="frame" x="0.0" y="116" width="375" height="502"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="wAS-4G-3lK" firstAttribute="bottom" secondItem="kYR-hp-q4f" secondAttribute="bottom" id="VY5-rG-axC"/>
+                            <constraint firstItem="kYR-hp-q4f" firstAttribute="leading" secondItem="wAS-4G-3lK" secondAttribute="leading" id="Vhj-He-rq6"/>
+                            <constraint firstItem="kYR-hp-q4f" firstAttribute="top" secondItem="wAS-4G-3lK" secondAttribute="top" id="qjZ-Du-VKI"/>
+                            <constraint firstItem="wAS-4G-3lK" firstAttribute="trailing" secondItem="kYR-hp-q4f" secondAttribute="trailing" id="tfp-JA-967"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="wAS-4G-3lK"/>
                     </view>
                     <navigationItem key="navigationItem" title="EasyCurrency" id="x2l-xK-4fz">
-                        <barButtonItem key="leftBarButtonItem" title="Logout" id="zqD-Tz-lVC"/>
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="zqD-Tz-lVC">
+                            <connections>
+                                <action selector="logoutBtn:" destination="Z4D-Gi-tWX" id="R6J-gV-oTp"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="uCV-gM-1jP"/>
                     </navigationItem>
                 </viewController>
@@ -494,6 +510,9 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="wkc-Y8-9i5">
                         <rect key="frame" x="0.0" y="20" width="375" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <textAttributes key="largeTitleTextAttributes">
+                            <offsetWrapper key="textShadowOffset" horizontal="0.0" vertical="0.0"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>

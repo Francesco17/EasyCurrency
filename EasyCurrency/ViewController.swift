@@ -12,6 +12,10 @@ import LocalAuthentication
 
 class ViewController: UIViewController {
     
+    struct defaultKeys {
+        static let keyOne = "username"
+    }
+    
     //    MARK: Properties
     
     @IBOutlet weak var nameTextField: UITextField!
@@ -19,10 +23,10 @@ class ViewController: UIViewController {
     @IBOutlet weak var passwTextfield: UITextField!
     @IBOutlet weak var passLabel: UILabel!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
     }
     
@@ -35,10 +39,6 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-//    override func viewWillAppear(_ animated: Bool) {
-//        navigationItem.title = "EasyCurrency"
-//    }
     
     //    MARK: Actions
     
@@ -71,9 +71,10 @@ class ViewController: UIViewController {
                 if let dictionary = json as? [String: Any]{
                     if let state = dictionary["state"] as? String{
                         if state == "SUCCESS" {
-//                            let cookie = dictionary["cookie"] as? String
-//                            print(cookie!)
                             OperationQueue.main.addOperation {
+                                //storing username locally
+                                let defaults = UserDefaults.standard
+                                defaults.set(self.nameTextField.text, forKey: defaultKeys.keyOne)
                                 self.performSegue(withIdentifier: "loginSuccess", sender: self)
                             }
                         }
