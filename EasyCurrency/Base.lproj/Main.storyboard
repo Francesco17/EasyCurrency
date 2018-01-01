@@ -346,6 +346,9 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="kYR-hp-q4f">
                                 <rect key="frame" x="0.0" y="255" width="375" height="363"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="Z4D-Gi-tWX" id="lfF-xD-KDS"/>
+                                </connections>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tUO-ab-d1t">
                                 <rect key="frame" x="33" y="129" width="309" height="32"/>
@@ -408,35 +411,19 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="uCV-gM-1jP">
                             <connections>
                                 <action selector="addTransBtn:" destination="Z4D-Gi-tWX" id="eyo-Zn-3s6"/>
-                                <segue destination="7uO-F0-g1D" kind="show" id="VS7-Yv-mmp"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="balanceTextField" destination="kS3-Rl-x84" id="Ae5-7U-fjZ"/>
                         <outlet property="depositTextField" destination="YVB-V5-4dp" id="RpM-yG-1Q8"/>
-                        <outlet property="tableview" destination="kYR-hp-q4f" id="l7S-BM-g1p"/>
+                        <outlet property="tableView" destination="kYR-hp-q4f" id="yRj-mi-waw"/>
                         <outlet property="usernameTextField" destination="tUO-ab-d1t" id="Rp2-hu-r92"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9iK-Cy-ksX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3061.5999999999999" y="536.58170914542734"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="PDd-9F-rAe">
-            <objects>
-                <viewController id="7uO-F0-g1D" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="sZy-ei-3fI">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="uA0-CW-j8w"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="E21-LN-Vx5" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4255" y="536"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="GEW-Kn-Sn0">
