@@ -407,6 +407,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="uCV-gM-1jP">
                             <connections>
+                                <action selector="addTransBtn:" destination="Z4D-Gi-tWX" id="PsQ-bt-552"/>
                                 <segue destination="zBy-hB-LdR" kind="presentation" identifier="addTrans" id="pkU-em-LUr"/>
                             </connections>
                         </barButtonItem>
@@ -414,6 +415,7 @@
                     <connections>
                         <outlet property="balanceTextField" destination="kS3-Rl-x84" id="Ae5-7U-fjZ"/>
                         <outlet property="depositTextField" destination="YVB-V5-4dp" id="RpM-yG-1Q8"/>
+                        <outlet property="tableView" destination="kYR-hp-q4f" id="G3Z-QU-a4a"/>
                         <outlet property="usernameTextField" destination="tUO-ab-d1t" id="Rp2-hu-r92"/>
                     </connections>
                 </viewController>

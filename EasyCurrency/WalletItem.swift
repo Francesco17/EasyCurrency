@@ -8,6 +8,8 @@
 
 import UIKit
 
+var transactions = [Transaction]()
+
 class WalletItem: UIViewController {
     
 //    MARK: properties
@@ -18,21 +20,56 @@ class WalletItem: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-//    var transactions = [String]()
+    var user_id = Int()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        tableView.delegate = self
+        tableView.dataSource = self
         
 //        getting stored informations
         let defaults = UserDefaults.standard
         if let userName_logged = defaults.string(forKey: "username"){
             self.usernameTextField.text = "Username: "+userName_logged.capitalized
         }
+        if let user_id = defaults.string(forKey: "user_id"){
+            self.user_id = Int(user_id)!
+        }
+        
+        let url = URL(string: "http://francesco1735212.ddns.net:3000/server_app_mob/get_transactions.php?user_id="+String(self.user_id) )
+        let task = URLSession.shared.dataTask(with: url!) { (data, response, error) in
+            
+            if error != nil {
+                print("HTTP request error")
+            }
+            else{
+                do{
+                    let json = try JSONSerialization.jsonObject(with: data!) as? [String: Any]
+                    if let trans = json!["transactions"] as? [[String:Any]]{
+                        for tra in trans{
+                            let am = Double(tra["amount"] as! String)
+                            let cu = String(tra["currency"] as! String)
+                            let ra = Double(tra["rate"] as! String)
+                            let tr = Transaction(amount: am!, currency: cu, rate: ra!, user: self.user_id)
+                            transactions.append(tr)
+                        }
+                    }
+                    else{
+                        print("Error")
+                    }
+                }catch {
+                    print("Error parsing Json")
+                }
+            }
+        }
+        task.resume()
+        
         self.depositTextField.text = "Deposit = 100..to be done"
         self.balanceTextField.text = "Balance = 100..to be done"
         
-        tableView.tableFooterView = UIView(frame: CGRect.zero)
+//        tableView.tableFooterView = UIView(frame: CGRect.zero)
         
     }
 
@@ -42,7 +79,8 @@ class WalletItem: UIViewController {
     }
     
     @IBAction func addTransBtn(_ sender: UIBarButtonItem) {
-        
+
+        self.performSegue(withIdentifier: "addTrans", sender: self)
     }
     
     @IBAction func logoutBtn(_ sender: UIBarButtonItem) {
@@ -52,25 +90,18 @@ class WalletItem: UIViewController {
     }
 }
 
-//extension WalletItem: UITableViewDataSource {
-//    func numberOfSections(in tableView: UITableView) -> Int {
-//        return 1
-//    }
-//    
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return transactions.count
-//    }
-//    
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: nil)
-//        cell.textLabel?.text = ""
-//        cell.detailTextLabel?.text = ""
-//        return cell
-//    }
-//}
+extension WalletItem: UITableViewDelegate, UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
 
-
-
-
-
-
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return transactions.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
+        cell.textLabel?.text = "Transaction "+String(indexPath.row+1)+": "+String(transactions[indexPath.row].amount)+" EUR in "+String(transactions[indexPath.row].currency)
+        return cell
+    }
+}
