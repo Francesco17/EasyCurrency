@@ -14,6 +14,7 @@ class ViewController: UIViewController {
     
     struct defaultKeys {
         static let keyOne = "username"
+        static let keyTwo = "user_id"
     }
     
     //    MARK: Properties
@@ -71,10 +72,12 @@ class ViewController: UIViewController {
                 if let dictionary = json as? [String: Any]{
                     if let state = dictionary["state"] as? String{
                         if state == "SUCCESS" {
+                            let user_id = dictionary["id"]
                             OperationQueue.main.addOperation {
                                 //storing username locally
                                 let defaults = UserDefaults.standard
                                 defaults.set(self.nameTextField.text, forKey: defaultKeys.keyOne)
+                                defaults.set(user_id, forKey: defaultKeys.keyTwo)
                                 self.performSegue(withIdentifier: "loginSuccess", sender: self)
                             }
                         }
@@ -124,11 +127,11 @@ class ViewController: UIViewController {
                         }
                     } else {
                         // User did not authenticate successfully, look at error and take appropriate action
-                        DispatchQueue.main.async {
-                            let alertController = UIAlertController(title: "ERROR", message: "Fingerprint not identified", preferredStyle: UIAlertControllerStyle.alert)
-                            alertController.addAction(UIAlertAction(title: "Ok", style:UIAlertActionStyle.default, handler:nil))
-                            self.present(alertController, animated: true, completion: nil)
-                        }
+//                        DispatchQueue.main.async {
+//                            let alertController = UIAlertController(title: "ERROR", message: "Fingerprint not identified", preferredStyle: UIAlertControllerStyle.alert)
+//                            alertController.addAction(UIAlertAction(title: "Ok", style:UIAlertActionStyle.default, handler:nil))
+//                            self.present(alertController, animated: true, completion: nil)
+//                        }
                     }
                 }
             } else {
