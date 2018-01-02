@@ -38,39 +38,47 @@ class WalletItem: UIViewController {
             self.user_id = Int(user_id)!
         }
         
-        let url = URL(string: "http://francesco1735212.ddns.net:3000/server_app_mob/get_transactions.php?user_id="+String(self.user_id) )
-        let task = URLSession.shared.dataTask(with: url!) { (data, response, error) in
-            
-            if error != nil {
-                print("HTTP request error")
-            }
-            else{
-                do{
-                    let json = try JSONSerialization.jsonObject(with: data!) as? [String: Any]
-                    if let trans = json!["transactions"] as? [[String:Any]]{
-                        for tra in trans{
-                            let am = Double(tra["amount"] as! String)
-                            let cu = String(tra["currency"] as! String)
-                            let ra = Double(tra["rate"] as! String)
-                            let tr = Transaction(amount: am!, currency: cu, rate: ra!, user: self.user_id)
-                            transactions.append(tr)
-                        }
-                    }
-                    else{
-                        print("Error")
-                    }
-                }catch {
-                    print("Error parsing Json")
-                }
-            }
-        }
-        task.resume()
-        
         self.depositTextField.text = "Deposit = 100..to be done"
         self.balanceTextField.text = "Balance = 100..to be done"
         
-//        tableView.tableFooterView = UIView(frame: CGRect.zero)
+        func get_trans(user_id: Int, completion: @escaping ()->()){
+    
+            let url = URL(string: "http://francesco1735212.ddns.net:3000/server_app_mob/get_transactions.php?user_id="+String(user_id) )
+            let task = URLSession.shared.dataTask(with: url!) { (data, response, error) in
+                
+                if error != nil {
+                    print("HTTP request error")
+                }
+                else{
+                    do{
+                        let json = try JSONSerialization.jsonObject(with: data!) as? [String: Any]
+                        if let trans = json!["transactions"] as? [[String:Any]]{
+                            for tra in trans{
+                                let am = Double(tra["amount"] as! String)
+                                let cu = String(tra["currency"] as! String)
+                                let ra = Double(tra["rate"] as! String)
+                                let tr = Transaction(amount: am!, currency: cu, rate: ra!, user: user_id)
+                                transactions.append(tr)
+                            }
+                        }
+                        else{
+                            print("Error")
+                        }
+                    }catch {
+                        print("Error parsing Json")
+                    }
+                }
+                completion()
+            }
+            task.resume()
+        }
         
+        get_trans(user_id: self.user_id) {
+            OperationQueue.main.addOperation {
+                self.tableView.reloadData()
+            }
+        }
+
     }
 
     override func didReceiveMemoryWarning() {
