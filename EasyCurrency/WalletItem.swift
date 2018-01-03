@@ -13,6 +13,7 @@ var transactions = [Transaction]()
 class WalletItem: UIViewController {
     
 //    MARK: properties
+    let defaults = UserDefaults.standard
     
     @IBOutlet weak var usernameTextField: UILabel!
     @IBOutlet weak var depositTextField: UILabel!
@@ -30,7 +31,7 @@ class WalletItem: UIViewController {
         tableView.dataSource = self
         
 //        getting stored informations
-        let defaults = UserDefaults.standard
+
         if let userName_logged = defaults.string(forKey: "username"){
             self.usernameTextField.text = "Username: "+userName_logged.capitalized
         }
@@ -78,7 +79,8 @@ class WalletItem: UIViewController {
                 self.tableView.reloadData()
             }
         }
-
+        
+        tableView.tableFooterView = UIView(frame: CGRect.zero)
     }
 
     override func didReceiveMemoryWarning() {
@@ -92,6 +94,9 @@ class WalletItem: UIViewController {
     }
     
     @IBAction func logoutBtn(_ sender: UIBarButtonItem) {
+        defaults.removeObject(forKey: "username")
+        defaults.removeObject(forKey: "user_id")
+        transactions.removeAll()
         OperationQueue.main.addOperation {
             self.dismiss(animated: true, completion: nil)
         }
