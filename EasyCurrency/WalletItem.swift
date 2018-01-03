@@ -117,4 +117,22 @@ extension WalletItem: UITableViewDelegate, UITableViewDataSource {
         cell.textLabel?.text = "Transaction "+String(indexPath.row+1)+": "+String(transactions[indexPath.row].amount)+" EUR in "+String(transactions[indexPath.row].currency)
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete{
+            transactions.remove(at: indexPath.row)
+            
+            tableView.beginUpdates()
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+            tableView.endUpdates()
+        }
+    }
+    
+    
+    
+    
 }
