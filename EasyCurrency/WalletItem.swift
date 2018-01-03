@@ -55,10 +55,11 @@ class WalletItem: UIViewController {
                         let json = try JSONSerialization.jsonObject(with: data!) as? [String: Any]
                         if let trans = json!["transactions"] as? [[String:Any]]{
                             for tra in trans{
+                                let id = String(tra["id"] as! String)
                                 let am = Double(tra["amount"] as! String)
                                 let cu = String(tra["currency"] as! String)
                                 let ra = Double(tra["rate"] as! String)
-                                let tr = Transaction(amount: am!, currency: cu, rate: ra!, user: user_id)
+                                let tr = Transaction(id: id, amount: am!, currency: cu, rate: ra!, user: user_id)
                                 transactions.append(tr)
                             }
                         }
@@ -89,7 +90,6 @@ class WalletItem: UIViewController {
     }
     
     @IBAction func addTransBtn(_ sender: UIBarButtonItem) {
-
         self.performSegue(withIdentifier: "addTrans", sender: self)
     }
     
@@ -97,6 +97,7 @@ class WalletItem: UIViewController {
         defaults.removeObject(forKey: "username")
         defaults.removeObject(forKey: "user_id")
         transactions.removeAll()
+        tableView.reloadData()
         OperationQueue.main.addOperation {
             self.dismiss(animated: true, completion: nil)
         }
@@ -124,6 +125,7 @@ extension WalletItem: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete{
+            transactions[indexPath.row].removeTrans(id: transactions[indexPath.row].id)
             transactions.remove(at: indexPath.row)
             
             tableView.beginUpdates()

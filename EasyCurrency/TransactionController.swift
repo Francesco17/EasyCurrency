@@ -74,7 +74,7 @@ class TransactionController: UIViewController {
         if self.amountField.text != "" {
             getRates(selCurrencyFrom: "EUR", selCurrencyTo: self.currencyField.text!){ rate in
                 OperationQueue.main.addOperation {
-                    let trans = Transaction(amount: Double(self.amountField.text!)!, currency: self.currencyField.text!, rate: rate, user: self.user_id)
+                    let trans = Transaction(id: "", amount: Double(self.amountField.text!)!, currency: self.currencyField.text!, rate: rate, user: self.user_id)
                     trans.saveTrans()
                     transactions.append(trans)
                     self.dismiss(animated: true, completion: nil)
