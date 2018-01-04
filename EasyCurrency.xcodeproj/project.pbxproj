@@ -15,6 +15,7 @@
 		139106DF1FF2E21700FBC97C /* MapsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139106DE1FF2E21700FBC97C /* MapsItem.swift */; };
 		13BBB8251FF3964F0099C835 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13BBB8241FF3964F0099C835 /* RegistrationViewController.swift */; };
 		13CD419D1FF93E69006F8A82 /* EasyCurrency.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 13CD41971FF93A28006F8A82 /* EasyCurrency.xcdatamodeld */; };
+		13DCE9C21FFE57F100C3ABA9 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DCE9C11FFE57F100C3ABA9 /* Reachability.swift */; };
 		13F8AB1D1FEFC33500E9093F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F8AB1C1FEFC33500E9093F /* AppDelegate.swift */; };
 		13F8AB1F1FEFC33500E9093F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F8AB1E1FEFC33500E9093F /* ViewController.swift */; };
 		13F8AB221FEFC33500E9093F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13F8AB201FEFC33500E9093F /* Main.storyboard */; };
@@ -50,6 +51,7 @@
 		139106DE1FF2E21700FBC97C /* MapsItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapsItem.swift; sourceTree = "<group>"; };
 		13BBB8241FF3964F0099C835 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		13CD41981FF93A28006F8A82 /* EasyCurrency.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = EasyCurrency.xcdatamodel; sourceTree = "<group>"; };
+		13DCE9C11FFE57F100C3ABA9 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		13F8AB191FEFC33500E9093F /* EasyCurrency.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EasyCurrency.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13F8AB1C1FEFC33500E9093F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		13F8AB1E1FEFC33500E9093F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 				1301AD421FF4F5C500944028 /* WalletItem.swift */,
 				1322CF331FFB8A48009303C9 /* TransactionController.swift */,
 				1322CF311FFB7217009303C9 /* Transaction.swift */,
+				13DCE9C11FFE57F100C3ABA9 /* Reachability.swift */,
 				13F8AB201FEFC33500E9093F /* Main.storyboard */,
 				13F8AB231FEFC33500E9093F /* Assets.xcassets */,
 				13F8AB251FEFC33500E9093F /* LaunchScreen.storyboard */,
@@ -300,6 +303,7 @@
 				1322CF341FFB8A48009303C9 /* TransactionController.swift in Sources */,
 				13BBB8251FF3964F0099C835 /* RegistrationViewController.swift in Sources */,
 				1322CF321FFB7217009303C9 /* Transaction.swift in Sources */,
+				13DCE9C21FFE57F100C3ABA9 /* Reachability.swift in Sources */,
 				13F8AB1D1FEFC33500E9093F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

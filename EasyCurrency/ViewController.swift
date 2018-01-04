@@ -28,6 +28,11 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        if !Reachability.isConnectedToNetwork(){
+            let alert = UIAlertController(title: "No internet connection", message: "Make sure your device is connected to internet", preferredStyle: .alert)
+            self.present(alert, animated: true, completion: nil)
+        }
+        
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
     }
     
