@@ -72,14 +72,25 @@ class TransactionController: UIViewController {
         }
         
         if self.amountField.text != "" {
-            getRates(selCurrencyFrom: "EUR", selCurrencyTo: self.currencyField.text!){ rate in
-                OperationQueue.main.addOperation {
-                    let trans = Transaction(id: "", amount: Double(self.amountField.text!)!, currency: self.currencyField.text!, rate: rate, user: self.user_id)
-                    trans.saveTrans()
-                    transactions.append(trans)
-                    self.dismiss(animated: true, completion: nil)
+//            prendo il deposito e lo confronto
+            let amountTyped = Double(self.amountField.text!)!
+            let chosenCurrency = self.currencyField.text!
+            self.getDeposit(completion: { (deposit) in
+                if amountTyped > deposit {
+                    let alertController = UIAlertController(title: "ERROR", message: "The amount is greater than your deposit!", preferredStyle: .alert)
+                    alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler:nil))
+                    self.present(alertController, animated: true, completion: nil)
                 }
-            }
+                else{
+                    getRates(selCurrencyFrom: "EUR", selCurrencyTo: chosenCurrency){ rate in
+                        let trans = Transaction(id: "", amount: amountTyped, currency: chosenCurrency, rate: rate, user: self.user_id)
+                        let diffDepAmount = deposit - amountTyped
+                        trans.saveTrans(diffDepAmount: diffDepAmount)
+                        transactions.append(trans)
+                        self.dismiss(animated: true, completion: nil)
+                    }
+                }
+            })
         }
         else{
             let alertController = UIAlertController(title: "ERROR", message: "Insert a value in the amount field", preferredStyle: .alert)
@@ -88,6 +99,38 @@ class TransactionController: UIViewController {
         }
         
 
+    }
+    
+    func getDeposit (completion: @escaping (Double)->()){
+        var deposit = 0.0
+        
+        let url = URL(string: "http://francesco1735212.ddns.net:3000/server_app_mob/get_dep_bal.php?user_id="+String(self.user_id))
+        let task = URLSession.shared.dataTask(with: url!) { (data, response, error) in
+            if error != nil {
+                print("HTTP request error")
+            }
+            else{
+                do{
+                    let json = try JSONSerialization.jsonObject(with: data!)
+                    if let dictResponse = json as? [String:Any] {
+                        if let state = dictResponse["state"] as? String{
+                            if state == "SUCCESS"{
+                                let _deposit = dictResponse["deposit"] as? String
+                                deposit = Double(_deposit!)!
+                            }
+                            else{
+                                let cause = dictResponse["cause"] as? String
+                                print(cause!)
+                            }
+                        }
+                    }
+                }catch {
+                    print("Error parsing Json")
+                }
+            }
+            completion(deposit)
+        }
+        task.resume()
     }
     
     @IBAction func undoTransaction(_ sender: UIBarButtonItem) {

@@ -24,8 +24,8 @@ class Transaction {
         self.user = user
     }
     
-    func saveTrans() {
-        
+    func saveTrans(diffDepAmount: Double) {
+//        save transaction
         let url = URL(string: "http://francesco1735212.ddns.net:3000/server_app_mob/add_transaction.php")!
         var request = URLRequest(url: url)
         request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
@@ -63,6 +63,50 @@ class Transaction {
             }
         }
         task.resume()
+        
+        updateDep(dep: diffDepAmount)
+    
+    }
+    
+    func updateDep (dep: Double){
+        //        update deposit
+        let url2 = URL(string: "http://francesco1735212.ddns.net:3000/server_app_mob/update_balance_deposit.php")!
+        var request2 = URLRequest(url: url2)
+        request2.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        request2.httpMethod = "POST"
+        let postString2 = "deposit="+String(dep)+"&balance=&user_id="+String(self.user)
+        request2.httpBody = postString2.data(using: .utf8)
+        let task2 = URLSession.shared.dataTask(with: request2) { data2, response2, error2 in
+            guard let dat = data2, error2 == nil else {
+//                check for fundamental networking error
+                print("error=\(String(describing: error2))")
+                return
+            }
+            if let httpStatus = response2 as? HTTPURLResponse, httpStatus.statusCode != 200 {
+                //                check for http errors
+                print("statusCode should be 200, but is \(httpStatus.statusCode)")
+                print("response = \(String(describing: response2))")
+            }
+            let responseStr = String(data: dat, encoding: .utf8)
+            let responseStr2 = responseStr?.data(using:.utf8)!
+            do{
+                let json = try JSONSerialization.jsonObject(with: responseStr2!)
+                if let dictionary = json as? [String: Any]{
+                    if let state = dictionary["state"] as? String{
+                        if state == "SUCCESS" {
+                            print("deposit updated")
+                        }
+                        else if state == "FAIL" {
+                            print("Error occurred")
+                        }
+                    }
+                }
+            }
+            catch {
+                print("Error parsing Json")
+            }
+        }
+        task2.resume()
     }
     
     func removeTrans(id: String){

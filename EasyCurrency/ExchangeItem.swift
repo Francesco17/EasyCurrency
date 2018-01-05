@@ -68,13 +68,10 @@ class ExchangeItem: UIViewController {
                     do{
                         let json = try JSONSerialization.jsonObject(with: data!)
                         if let dictResponse = json as? [String:Any] {
-                            
                             if let currencies = dictResponse["rates"] as? [String:Any]{
-                                
                                 if currencies[self.selCurrencyTo] != nil {
                                     rate = (currencies[self.selCurrencyTo] as? Double)!
 //                                    print(rate)
-                                    
                                 }
                                 else{
                                     print("Rate not present")

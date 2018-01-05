@@ -22,6 +22,8 @@ class WalletItem: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var user_id = Int()
+    var deposit = Double()
+    var balance = Double()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,8 +41,12 @@ class WalletItem: UIViewController {
             self.user_id = Int(user_id)!
         }
         
-        self.depositTextField.text = "Deposit = 100..to be done"
-        self.balanceTextField.text = "Balance = 100..to be done"
+        get_depbal(id: self.user_id) { (dep, bal) in
+            DispatchQueue.main.async {
+                self.depositTextField.text = "Deposit = "+dep
+                self.balanceTextField.text = "Balance = "+bal
+            }
+        }
         
         func get_trans(user_id: Int, completion: @escaping ()->()){
     
@@ -82,6 +88,39 @@ class WalletItem: UIViewController {
         }
         
         tableView.tableFooterView = UIView(frame: CGRect.zero)
+    }
+    
+    func get_depbal(id: Int, completion: @escaping (String, String)->()){
+        var dep = String()
+        var bal = String()
+        
+        let url = URL(string: "http://francesco1735212.ddns.net:3000/server_app_mob/get_dep_bal.php?user_id="+String(id) )
+        let task = URLSession.shared.dataTask(with: url!) { (data, response, error) in
+            
+            if error != nil {
+                print("HTTP request error")
+            }
+            else{
+                do{
+                    let json = try JSONSerialization.jsonObject(with: data!)
+                    if let dictResponse = json as? [String:Any] {
+                        if let state = dictResponse["state"] as? String{
+                            if state == "SUCCESS"{                                
+                                dep = dictResponse["deposit"] as! String
+                                bal = dictResponse["balance"] as! String
+                            }
+                            else {
+                                print("Get deposit/balance failed")
+                            }
+                        }
+                    }
+                }catch {
+                    print("Error parsing Json")
+                }
+            }
+            completion(dep, bal)
+        }
+        task.resume()
     }
     
     override func viewWillAppear(_ animated: Bool) {
