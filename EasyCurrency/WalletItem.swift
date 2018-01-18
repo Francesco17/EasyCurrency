@@ -42,6 +42,7 @@ class WalletItem: UIViewController {
         }
         
         get_depbal(id: self.user_id) { (dep, bal) in
+            self.defaults.set(dep, forKey: "deposit")
             DispatchQueue.main.async {
                 self.depositTextField.text = "Deposit = "+dep
                 self.balanceTextField.text = "Balance = "+bal
@@ -168,7 +169,8 @@ extension WalletItem: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete{
-            transactions[indexPath.row].removeTrans(id: transactions[indexPath.row].id)
+            transactions[indexPath.row].removeTrans(trans: transactions[indexPath.row])
+//            transactions[indexPath.row].removeTrans(id: transactions[indexPath.row].id)
             transactions.remove(at: indexPath.row)
             
             tableView.beginUpdates()

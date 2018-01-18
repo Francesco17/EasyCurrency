@@ -15,6 +15,7 @@ class ViewController: UIViewController {
     struct defaultKeys {
         static let keyOne = "username"
         static let keyTwo = "user_id"
+        static let keyThree = "deposit"
     }
     
     //    MARK: Properties

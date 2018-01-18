@@ -8,6 +8,8 @@
 
 import Foundation
 
+let defaults = UserDefaults.standard
+
 class Transaction {
     
     var id: String
@@ -109,13 +111,24 @@ class Transaction {
         task2.resume()
     }
     
-    func removeTrans(id: String){
+    func removeTrans(trans: Transaction){
+        
+//        valore straniero che ho ottenuto al tempo della conversione
+        let foreignAmount = trans.amount * trans.rate;
+        let baseCurrency = "EUR"
+        
+        getRates(selCurrencyFrom: trans.currency, selCurrencyTo: baseCurrency) { (rat) in
+            let amountBack = foreignAmount*rat
+            let oldDeposit = defaults.double(forKey: "deposit")
+            let newDeposit = oldDeposit + amountBack
+            self.updateDep(dep: newDeposit)
+        }
         
         let url = URL(string: "http://francesco1735212.ddns.net:3000/server_app_mob/delete_transaction.php")!
         var request = URLRequest(url: url)
         request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
         request.httpMethod = "POST"
-        let postString = "id="+id
+        let postString = "id="+trans.id
         request.httpBody = postString.data(using: .utf8)
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data, error == nil else {
@@ -147,6 +160,35 @@ class Transaction {
             catch {
                 print("Error parsing Json")
             }
+        }
+        task.resume()
+    }
+    
+    func getRates(selCurrencyFrom: String, selCurrencyTo: String, completion: @escaping (Double)->()){
+        var rat = Double(1)
+        let url = URL(string: "https://api.fixer.io/latest?base="+selCurrencyFrom+"&symbols="+selCurrencyTo)
+        let task = URLSession.shared.dataTask(with: url!) { (data, response, error) in
+            if error != nil {
+                print("HTTP request error")
+            }
+            else{
+                do{
+                    let json = try JSONSerialization.jsonObject(with: data!)
+                    if let dictResponse = json as? [String:Any] {
+                        if let currencies = dictResponse["rates"] as? [String:Any]{
+                            if currencies[selCurrencyTo] != nil {
+                                rat = (currencies[selCurrencyTo] as? Double)!
+                            }
+                            else{
+                                print("Rate not present")
+                            }
+                        }
+                    }
+                }catch {
+                    print("Error parsing Json")
+                }
+            }
+            completion(rat)
         }
         task.resume()
     }
