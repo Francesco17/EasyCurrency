@@ -169,17 +169,59 @@ extension WalletItem: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete{
-            transactions[indexPath.row].removeTrans(trans: transactions[indexPath.row])
-//            transactions[indexPath.row].removeTrans(id: transactions[indexPath.row].id)
-            transactions.remove(at: indexPath.row)
             
-            tableView.beginUpdates()
-            tableView.deleteRows(at: [indexPath], with: .automatic)
-            tableView.endUpdates()
+            let foreignAmount = transactions[indexPath.row].amount * transactions[indexPath.row].rate;
+            let baseCurrency = "EUR"
+            
+            getRates(selCurrencyFrom: transactions[indexPath.row].currency, selCurrencyTo: baseCurrency, completion: { (rat) in
+                let amountBack = foreignAmount*rat
+                let oldDeposit = self.defaults.double(forKey: "deposit")
+                let newDeposit = oldDeposit + amountBack
+                transactions[indexPath.row].updateDep(dep: newDeposit)
+                self.defaults.set(newDeposit, forKey: "deposit")
+                
+                transactions[indexPath.row].removeTrans(trans: transactions[indexPath.row])
+                transactions.remove(at: indexPath.row)
+                
+                DispatchQueue.main.async {
+                    self.depositTextField.text = "Deposit = "+String(newDeposit)
+                    tableView.beginUpdates()
+                    tableView.deleteRows(at: [indexPath], with: .automatic)
+                    tableView.endUpdates()
+                }
+            })
+
         }
     }
     
-    
+    func getRates(selCurrencyFrom: String, selCurrencyTo: String, completion: @escaping (Double)->()){
+        var rat = Double(1)
+        let url = URL(string: "https://api.fixer.io/latest?base="+selCurrencyFrom+"&symbols="+selCurrencyTo)
+        let task = URLSession.shared.dataTask(with: url!) { (data, response, error) in
+            if error != nil {
+                print("HTTP request error")
+            }
+            else{
+                do{
+                    let json = try JSONSerialization.jsonObject(with: data!)
+                    if let dictResponse = json as? [String:Any] {
+                        if let currencies = dictResponse["rates"] as? [String:Any]{
+                            if currencies[selCurrencyTo] != nil {
+                                rat = (currencies[selCurrencyTo] as? Double)!
+                            }
+                            else{
+                                print("Rate not present")
+                            }
+                        }
+                    }
+                }catch {
+                    print("Error parsing Json")
+                }
+            }
+            completion(rat)
+        }
+        task.resume()
+    }
     
     
 }
