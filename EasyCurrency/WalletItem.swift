@@ -92,17 +92,19 @@ class WalletItem: UIViewController {
         
         getRates(selCurrencyFrom: "EUR", selCurrencyTo: buff) { (rates) in
 
-            for i in 0...trans.count-1{
-                let oldAmount = trans[i].amount*trans[i].rate
-                print("oldAmount: "+String(oldAmount))
-                let newAmount = oldAmount/rates[i]
-                print("newAmount: "+String(newAmount))
-                self.balance += newAmount
+            if trans.count > 0 {
+                for i in 0...trans.count-1{
+                    let oldAmount = trans[i].amount*trans[i].rate
+                    print("oldAmount: "+String(oldAmount))
+                    let newAmount = oldAmount/rates[i]
+                    print("newAmount: "+String(newAmount))
+                    self.balance += newAmount
+                }
+                print("balance: "+String(self.balance))
+                self.updateBalance(bal: self.balance)
+                
             }
-            print("balance: "+String(self.balance))
-            self.updateBalance(bal: self.balance)
             completion(self.balance)
-
         }
 
     }
