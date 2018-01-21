@@ -86,6 +86,7 @@ class TransactionController: UIViewController {
                         let trans = Transaction(id: "", amount: amountTyped, currency: chosenCurrency, rate: rate, user: self.user_id)
                         let diffDepAmount = deposit - amountTyped
                         trans.saveTrans(diffDepAmount: diffDepAmount)
+                        defaults.set(diffDepAmount, forKey: "deposit")
                         transactions.append(trans)
                         self.dismiss(animated: true, completion: nil)
                     }

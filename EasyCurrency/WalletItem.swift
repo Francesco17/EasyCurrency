@@ -41,25 +41,42 @@ class WalletItem: UIViewController {
             self.user_id = Int(user_id)!
         }
         
-        get_trans(user_id: self.user_id) {
-            OperationQueue.main.addOperation {
-                self.tableView.reloadData()
-                self.computeNewBalance(trans: transactions)
-            }
-            
-            self.get_depbal(id: self.user_id) { (dep, bal) in
-                self.defaults.set(dep, forKey: "deposit")
-                DispatchQueue.main.async {
-                    self.depositTextField.text = "Deposit = "+dep
-                    self.balanceTextField.text = "Balance = "+String(self.balance)
-                }
-            }
-        }
-        
         tableView.tableFooterView = UIView(frame: CGRect.zero)
     }
     
-    func computeNewBalance(trans: [Transaction]){
+    override func viewWillAppear(_ animated: Bool) {
+//        self.tableView.reloadData()
+//        self.computeNewBalance(trans: transactions)
+        transactions = []
+        get_trans(user_id: self.user_id) {
+            
+            OperationQueue.main.addOperation {
+                self.tableView.reloadData()
+                self.computeNewBalance(trans: transactions, completion: { (bal) in
+                    DispatchQueue.main.async {
+                        self.balanceTextField.text = "Balance = "+String(self.balance)
+                    }
+                })
+//                let alert = UIAlertController(title: "Balance Updated!", message: "", preferredStyle: UIAlertControllerStyle.alert)
+//                alert.addAction(UIAlertAction(title: "Ok", style:UIAlertActionStyle.default, handler:nil))
+//                self.present(alert, animated: true, completion: nil)
+                
+                self.get_depbal(id: self.user_id) { (dep, bal) in
+                    self.defaults.set(dep, forKey: "deposit")
+                    DispatchQueue.main.async {
+                        self.depositTextField.text = "Deposit = "+dep
+//                        self.balanceTextField.text = "Balance = "+bal
+                    }
+                }
+                
+                self.balanceTextField.text = "Balance = "+String(self.balance)
+            }
+        
+        }
+        
+    }
+    
+    func computeNewBalance(trans: [Transaction], completion: @escaping (Double)->()){
         
         self.balance = defaults.double(forKey: "deposit")
         
@@ -84,6 +101,8 @@ class WalletItem: UIViewController {
             }
             print("balance: "+String(self.balance))
             self.updateBalance(bal: self.balance)
+            completion(self.balance)
+
         }
 
     }
@@ -193,11 +212,6 @@ class WalletItem: UIViewController {
             completion()
         }
         task.resume()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        self.tableView.reloadData()
-//        self.computeNewBalance(trans: transactions)
     }
 
     override func didReceiveMemoryWarning() {
