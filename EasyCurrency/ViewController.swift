@@ -39,7 +39,7 @@ class ViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        touchIdAuthentication()
+//        touchIdAuthentication()
     }
 
     override func didReceiveMemoryWarning() {
