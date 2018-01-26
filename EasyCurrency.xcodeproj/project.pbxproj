@@ -17,6 +17,8 @@
 		139106DF1FF2E21700FBC97C /* MapsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139106DE1FF2E21700FBC97C /* MapsItem.swift */; };
 		13BBB8251FF3964F0099C835 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13BBB8241FF3964F0099C835 /* RegistrationViewController.swift */; };
 		13CD419D1FF93E69006F8A82 /* EasyCurrency.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 13CD41971FF93A28006F8A82 /* EasyCurrency.xcdatamodeld */; };
+		13D220D2201B977A00E57B69 /* LineChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D220D1201B977A00E57B69 /* LineChart.swift */; };
+		13D220D4201B97B500E57B69 /* GraphsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D220D3201B97B500E57B69 /* GraphsController.swift */; };
 		13DCE9C21FFE57F100C3ABA9 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DCE9C11FFE57F100C3ABA9 /* Reachability.swift */; };
 		13F8AB1D1FEFC33500E9093F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F8AB1C1FEFC33500E9093F /* AppDelegate.swift */; };
 		13F8AB1F1FEFC33500E9093F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F8AB1E1FEFC33500E9093F /* ViewController.swift */; };
@@ -55,6 +57,8 @@
 		139106DE1FF2E21700FBC97C /* MapsItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapsItem.swift; sourceTree = "<group>"; };
 		13BBB8241FF3964F0099C835 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		13CD41981FF93A28006F8A82 /* EasyCurrency.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = EasyCurrency.xcdatamodel; sourceTree = "<group>"; };
+		13D220D1201B977A00E57B69 /* LineChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LineChart.swift; path = "../../../../Downloads/swift-linechart-master/linechart/LineChart.swift"; sourceTree = "<group>"; };
+		13D220D3201B97B500E57B69 /* GraphsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphsController.swift; sourceTree = "<group>"; };
 		13DCE9C11FFE57F100C3ABA9 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		13F8AB191FEFC33500E9093F /* EasyCurrency.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EasyCurrency.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13F8AB1C1FEFC33500E9093F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -130,6 +134,8 @@
 			isa = PBXGroup;
 			children = (
 				13F8AB1C1FEFC33500E9093F /* AppDelegate.swift */,
+				13D220D1201B977A00E57B69 /* LineChart.swift */,
+				13D220D3201B97B500E57B69 /* GraphsController.swift */,
 				13F8AB1E1FEFC33500E9093F /* ViewController.swift */,
 				13BBB8241FF3964F0099C835 /* RegistrationViewController.swift */,
 				139106DE1FF2E21700FBC97C /* MapsItem.swift */,
@@ -305,7 +311,9 @@
 				13CD419D1FF93E69006F8A82 /* EasyCurrency.xcdatamodeld in Sources */,
 				1301AD431FF4F5C500944028 /* WalletItem.swift in Sources */,
 				1301AD411FF4F5B200944028 /* ExchangeItem.swift in Sources */,
+				13D220D4201B97B500E57B69 /* GraphsController.swift in Sources */,
 				132FAC0D201B8AD700CF9A94 /* GraphsItem.swift in Sources */,
+				13D220D2201B977A00E57B69 /* LineChart.swift in Sources */,
 				13F8AB1F1FEFC33500E9093F /* ViewController.swift in Sources */,
 				1322CF341FFB8A48009303C9 /* TransactionController.swift in Sources */,
 				13BBB8251FF3964F0099C835 /* RegistrationViewController.swift in Sources */,
