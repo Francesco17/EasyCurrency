@@ -427,11 +427,11 @@
             </objects>
             <point key="canvasLocation" x="3126" y="17"/>
         </scene>
-        <!--Item-->
+        <!--Graphs-->
         <scene sceneID="g1S-TP-Lgf">
             <objects>
                 <navigationController id="Bit-9U-rhV" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="LJi-p6-rFh"/>
+                    <tabBarItem key="tabBarItem" title="Graphs" image="graphs-25" id="LJi-p6-rFh"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="Bm1-cW-WmR">
                         <rect key="frame" x="0.0" y="20" width="375" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -447,33 +447,27 @@
         <!--EasyCurrency-->
         <scene sceneID="VeW-il-Zrm">
             <objects>
-                <tableViewController id="9nE-Hw-gPH" sceneMemberID="viewController">
+                <tableViewController id="9nE-Hw-gPH" customClass="GraphsItem" customModule="EasyCurrency" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Lqu-fj-yWW">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="85" id="v6o-8O-fbD">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="85" id="v6o-8O-fbD" customClass="CustomCell" customModule="EasyCurrency" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="85"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="v6o-8O-fbD" id="Cmf-hu-e26">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="84.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="J8J-f6-Y5O">
-                                            <rect key="frame" x="16" y="9" width="65" height="65"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="65" id="wms-IP-n8X"/>
-                                            </constraints>
-                                        </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oR8-aV-GZh">
-                                            <rect key="frame" x="89" y="11" width="170" height="63"/>
+                                            <rect key="frame" x="82" y="13" width="177" height="58"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HB9-fr-mIk">
-                                            <rect key="frame" x="267" y="11" width="92" height="63"/>
+                                            <rect key="frame" x="267" y="13" width="92" height="58"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="92" id="A2N-yx-u1Y"/>
                                             </constraints>
@@ -481,6 +475,12 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="J8J-f6-Y5O">
+                                            <rect key="frame" x="16" y="13" width="58" height="58"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="58" id="wms-IP-n8X"/>
+                                            </constraints>
+                                        </imageView>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="J8J-f6-Y5O" firstAttribute="centerY" secondItem="Cmf-hu-e26" secondAttribute="centerY" id="94C-Ex-otX"/>
@@ -488,13 +488,18 @@
                                         <constraint firstItem="HB9-fr-mIk" firstAttribute="leading" secondItem="oR8-aV-GZh" secondAttribute="trailing" constant="8" symbolic="YES" id="cgP-Ch-rh0"/>
                                         <constraint firstItem="HB9-fr-mIk" firstAttribute="trailing" secondItem="Cmf-hu-e26" secondAttribute="trailingMargin" id="eM0-Z7-DxJ"/>
                                         <constraint firstItem="oR8-aV-GZh" firstAttribute="baseline" secondItem="HB9-fr-mIk" secondAttribute="baseline" id="iRg-M1-NbH"/>
-                                        <constraint firstItem="oR8-aV-GZh" firstAttribute="leading" secondItem="J8J-f6-Y5O" secondAttribute="trailing" constant="8" symbolic="YES" id="jF4-ep-dcI"/>
+                                        <constraint firstItem="oR8-aV-GZh" firstAttribute="leading" secondItem="J8J-f6-Y5O" secondAttribute="trailing" constant="8" id="jF4-ep-dcI"/>
                                         <constraint firstItem="J8J-f6-Y5O" firstAttribute="leading" secondItem="Cmf-hu-e26" secondAttribute="leadingMargin" id="jjp-sS-FmO"/>
-                                        <constraint firstItem="J8J-f6-Y5O" firstAttribute="bottom" secondItem="Cmf-hu-e26" secondAttribute="bottomMargin" id="k1k-yg-Dig"/>
-                                        <constraint firstItem="oR8-aV-GZh" firstAttribute="top" secondItem="Cmf-hu-e26" secondAttribute="topMargin" id="sW9-eW-EqI"/>
+                                        <constraint firstItem="J8J-f6-Y5O" firstAttribute="bottom" secondItem="Cmf-hu-e26" secondAttribute="bottomMargin" constant="-3" id="k1k-yg-Dig"/>
+                                        <constraint firstItem="oR8-aV-GZh" firstAttribute="top" secondItem="Cmf-hu-e26" secondAttribute="topMargin" constant="2" id="sW9-eW-EqI"/>
                                         <constraint firstItem="oR8-aV-GZh" firstAttribute="firstBaseline" secondItem="HB9-fr-mIk" secondAttribute="firstBaseline" id="zo9-hC-OAv"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="currencyName" destination="oR8-aV-GZh" id="9Yw-cr-f89"/>
+                                    <outlet property="flag" destination="J8J-f6-Y5O" id="t0h-J5-cOD"/>
+                                    <outlet property="value" destination="HB9-fr-mIk" id="rkT-AT-kSF"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -503,8 +508,15 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="EasyCurrency" id="3RE-zD-JcE">
-                        <barButtonItem key="leftBarButtonItem" title="Logout" id="vte-ZF-oog"/>
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="vte-ZF-oog">
+                            <connections>
+                                <action selector="logoutBtn:" destination="9nE-Hw-gPH" id="ps3-Tx-6RP"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="Lqu-fj-yWW" id="xn4-Wh-Dsh"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K1w-8P-1og" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -757,6 +769,7 @@
     </scenes>
     <resources>
         <image name="exchange-25" width="25" height="25"/>
+        <image name="graphs-25" width="25" height="25"/>
         <image name="invert-25" width="25" height="25"/>
         <image name="maps-25" width="25" height="25"/>
         <image name="wallet-25" width="25" height="25"/>
