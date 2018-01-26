@@ -335,11 +335,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FJl-Jf-T3k" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3061.5999999999999" y="-159.67016491754123"/>
+            <point key="canvasLocation" x="3126" y="-681"/>
         </scene>
         <!--EasyCurrency-->
         <scene sceneID="A1P-H8-Cm3">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9iK-Cy-ksX" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="Z4D-Gi-tWX" customClass="WalletItem" customModule="EasyCurrency" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Kvt-KT-1NF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
@@ -421,9 +422,83 @@
                         <outlet property="usernameTextField" destination="tUO-ab-d1t" id="Rp2-hu-r92"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="9iK-Cy-ksX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3061.5999999999999" y="536.58170914542734"/>
+            <point key="canvasLocation" x="3126" y="17"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="g1S-TP-Lgf">
+            <objects>
+                <navigationController id="Bit-9U-rhV" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="LJi-p6-rFh"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="Bm1-cW-WmR">
+                        <rect key="frame" x="0.0" y="20" width="375" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="9nE-Hw-gPH" kind="relationship" relationship="rootViewController" id="Jaf-C9-U0B"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4zh-vj-uUs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2356" y="680"/>
+        </scene>
+        <!--EasyCurrency-->
+        <scene sceneID="VeW-il-Zrm">
+            <objects>
+                <tableViewController id="9nE-Hw-gPH" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Lqu-fj-yWW">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <label key="tableHeaderView" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ouh-eD-AQH">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="85" id="v6o-8O-fbD">
+                                <rect key="frame" x="0.0" y="72" width="375" height="85"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="v6o-8O-fbD" id="Cmf-hu-e26">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="84.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="J8J-f6-Y5O">
+                                            <rect key="frame" x="16" y="9" width="65" height="65"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oR8-aV-GZh">
+                                            <rect key="frame" x="89" y="11" width="170" height="63"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HB9-fr-mIk">
+                                            <rect key="frame" x="267" y="11" width="92" height="63"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="9nE-Hw-gPH" id="fVH-55-hIe"/>
+                            <outlet property="delegate" destination="9nE-Hw-gPH" id="L3W-tC-auc"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="EasyCurrency" id="3RE-zD-JcE">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="vte-ZF-oog"/>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="K1w-8P-1og" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3125.5999999999999" y="679.61019490254876"/>
         </scene>
         <!--Transaction Controller-->
         <scene sceneID="7uX-US-Nch">
@@ -513,7 +588,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2U0-qe-x1y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4093.5999999999999" y="536.58170914542734"/>
+            <point key="canvasLocation" x="4158" y="17"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="GEW-Kn-Sn0">
@@ -528,6 +603,7 @@
                         <segue destination="usu-lV-jYf" kind="relationship" relationship="viewControllers" id="50v-i7-lxw"/>
                         <segue destination="wCK-fu-UjU" kind="relationship" relationship="viewControllers" id="DYE-cg-Kc2"/>
                         <segue destination="yh5-wb-LzH" kind="relationship" relationship="viewControllers" id="C4E-Cn-4vk"/>
+                        <segue destination="Bit-9U-rhV" kind="relationship" relationship="viewControllers" id="Mdg-Wv-RLS"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aC9-m6-aN4" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -570,7 +646,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2AS-dj-K1a" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3061.5999999999999" y="-899.10044977511257"/>
+            <point key="canvasLocation" x="3126" y="-1420"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="fbH-pb-tTm">
@@ -625,7 +701,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Obx-Iv-Exa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2291.1999999999998" y="-898.65067466266873"/>
+            <point key="canvasLocation" x="2356" y="-1420"/>
         </scene>
         <!--Exchange-->
         <scene sceneID="oed-fQ-DVd">
@@ -644,7 +720,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PM6-k5-f9d" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2291.1999999999998" y="-158.32083958020991"/>
+            <point key="canvasLocation" x="2356" y="-680"/>
         </scene>
         <!--Wallet-->
         <scene sceneID="Zde-ax-evj">
@@ -666,7 +742,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KtS-yD-Lc6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2291.1999999999998" y="537.93103448275872"/>
+            <point key="canvasLocation" x="2356" y="18"/>
         </scene>
     </scenes>
     <resources>
