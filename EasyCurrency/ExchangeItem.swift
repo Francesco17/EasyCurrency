@@ -10,162 +10,49 @@ import UIKit
 
 class ExchangeItem: UIViewController {
     
-    @IBOutlet weak var currencyFrom: UIPickerView!
-    @IBOutlet weak var valueFrom: UITextField!
+    @IBOutlet weak var tableView: UITableView!
     
-    @IBOutlet weak var currencyTo: UIPickerView!
-    @IBOutlet weak var valueTo: UITextField!
+    var currencies = ["Austrialian dollar", "Bulgarian lev", "Brazilian real", "Canadian dollar", "Swiss franc", "Chinese yuan renminbi", "Czech koruna", "Danish krone", "Euro", "Pound sterling", "Hong Kong dollar", "Croatian kuna", "Hungarian forint", "Indonesian rupiah", "Israeli shekel", "Indian rupee", "Japanese yen", "South Korean won", "Mexican peso", "Malaysian ringgit", "Norwegian krone", "New Zealand dollar", "Philippine piso", "Polish zloty", "Romanian leu", "Russian rouble", "Swedish krona", "Singapore dollar", "Thai baht", "Turkish lira", "US dollar", "South African rand"]
     
-    @IBOutlet weak var button_change: UIButton!
-    
-    var currencyData: [String] = [String]()
-    var selCurrencyFrom = ""
-    var selCurrencyTo = ""
+    var flags = [#imageLiteral(resourceName: "australia"),#imageLiteral(resourceName: "bulgaria"),#imageLiteral(resourceName: "brazil"),#imageLiteral(resourceName: "canada"),#imageLiteral(resourceName: "switzerland"),#imageLiteral(resourceName: "china"),#imageLiteral(resourceName: "czech republic"),#imageLiteral(resourceName: "denmark"),#imageLiteral(resourceName: "europe"),#imageLiteral(resourceName: "united kingdom"),#imageLiteral(resourceName: "hong kong"),#imageLiteral(resourceName: "croatia"),#imageLiteral(resourceName: "hungary"),#imageLiteral(resourceName: "indonesia"),#imageLiteral(resourceName: "israel"),#imageLiteral(resourceName: "india"),#imageLiteral(resourceName: "japan"),#imageLiteral(resourceName: "south korea"),#imageLiteral(resourceName: "mexico"),#imageLiteral(resourceName: "malaysia"),#imageLiteral(resourceName: "norway"),#imageLiteral(resourceName: "new zealand"),#imageLiteral(resourceName: "philippines"),#imageLiteral(resourceName: "republic of poland"),#imageLiteral(resourceName: "romania"),#imageLiteral(resourceName: "russia"),#imageLiteral(resourceName: "sweden"),#imageLiteral(resourceName: "singapore"),#imageLiteral(resourceName: "thailand"),#imageLiteral(resourceName: "turkey"),#imageLiteral(resourceName: "usa"),#imageLiteral(resourceName: "south africa")]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        self.currencyFrom.delegate = self
-        self.currencyFrom.dataSource = self
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
         
-        self.currencyTo.delegate = self
-        self.currencyTo.dataSource = self
-        
-        currencyData = ["AUD", "BNG", "BRL", "CAD", "CHF", "CNY", "CZK", "DKK", "EUR", "GBP", "HKD", "HRK", "HUF", "IDR", "ILS", "INR", "JPY", "KRW", "MXN", "MYR", "NOK", "NZD", "PHP", "PLN", "RON", "RUB", "SEK", "SGD", "THB", "TRY", "USD", "ZAR"]
-        
-        currencyFrom.selectRow(8, inComponent: 0, animated: true)
-        currencyTo.selectRow(30, inComponent: 0, animated: true)
-        
-        selCurrencyFrom = currencyData[currencyFrom.selectedRow(inComponent: 0)]
-        selCurrencyTo = currencyData[currencyTo.selectedRow(inComponent: 0)]
-        
-        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-        
-    @IBAction func changeBtn(_ sender: UIButton) {
-        
-        var rate = Double(1)
-        
-        func getRates(selCurrencyFrom: String, selCurrencyTo: String, completion: @escaping (Double)->()){
-//            print("FROM: "+selCurrencyFrom)
-//            print("TO: "+selCurrencyTo)
-            
-            let url = URL(string: "https://api.fixer.io/latest?base="+selCurrencyFrom+"&symbols="+selCurrencyTo)
-//            print(url!)
-            
-            let task = URLSession.shared.dataTask(with: url!) { (data, response, error) in
-                
-                if error != nil {
-                    print("HTTP request error")
-                }
-                else{
-                    do{
-                        let json = try JSONSerialization.jsonObject(with: data!)
-                        if let dictResponse = json as? [String:Any] {
-                            if let currencies = dictResponse["rates"] as? [String:Any]{
-                                if currencies[self.selCurrencyTo] != nil {
-                                    rate = (currencies[self.selCurrencyTo] as? Double)!
-//                                    print(rate)
-                                }
-                                else{
-                                    print("Rate not present")
-                                }
-                            }
-                        }
-                    }catch {
-                        print("Error parsing Json")
-                    }
-                }
-                completion(rate)
-            }
-            task.resume()
-        }
-        
-        if self.valueFrom.text != "" {
-            getRates(selCurrencyFrom: selCurrencyFrom, selCurrencyTo: selCurrencyTo){ rate in
-                
-                DispatchQueue.main.async {
-                    let result =  Double(self.valueFrom.text!)!*rate
-                    self.valueTo.text = String(result)
-                }
-            }
-        }
-        else{
-            DispatchQueue.main.async {
-                let alertController = UIAlertController(title: "ERROR", message: "Insert a value", preferredStyle: UIAlertControllerStyle.alert)
-                
-                alertController.addAction(UIAlertAction(title: "Ok", style:UIAlertActionStyle.default, handler:nil))
-                
-                self.present(alertController, animated: true, completion: nil)
-            }
-        }
-        
+//        var currencyData = ["AUD", "BGN", "BRL", "CAD", "CHF", "CNY", "CZK", "DKK", "EUR", "GBP", "HKD", "HRK", "HUF", "IDR", "ILS", "INR", "JPY", "KRW", "MXN", "MYR", "NOK", "NZD", "PHP", "PLN", "RON", "RUB", "SEK", "SGD", "THB", "TRY", "USD", "ZAR"]
 
         
     }
-    
-    @IBAction func invertBtn(_ sender: UIButton) {
-        
-        let indice_from = currencyFrom.selectedRow(inComponent: 0)
-        let indice_to = currencyTo.selectedRow(inComponent: 0)
-        
-        currencyFrom.selectRow(indice_to, inComponent: 0, animated: true)
-        currencyFrom.reloadAllComponents()
-        
-        currencyTo.selectRow(indice_from, inComponent: 0, animated: true)
-        currencyTo.reloadAllComponents()
-        
-        selCurrencyFrom = currencyData[currencyFrom.selectedRow(inComponent: 0)]
-        selCurrencyTo = currencyData[currencyTo.selectedRow(inComponent: 0)]
-        
-        button_change.sendActions(for: .touchUpInside)
-    }
-    
     
     @IBAction func logoutBtn(_ sender: UIBarButtonItem) {
         OperationQueue.main.addOperation {
             self.dismiss(animated: true, completion: nil)
         }
     }
-    
-
 
 }
 
-extension ExchangeItem: UIPickerViewDelegate, UIPickerViewDataSource{
-
-    //    number of columns for each picker
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+extension ExchangeItem: UITableViewDelegate, UITableViewDataSource{
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    // The number of rows of data
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int{
-        return currencyData.count
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return currencies.count;
     }
     
-    // The data to return for the row and component (column) that's being passed in
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return currencyData[row]
-    }
-    
-    //    detecting selected currency
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        if pickerView == currencyFrom{
-            selCurrencyFrom = currencyData[row]
-//            print("currency from = "+selCurrencyFrom)
-        }
-        else{
-            selCurrencyTo = currencyData[row]
-//            print("currency to = "+selCurrencyTo)
-        }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = self.tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CustomCell
         
+        cell.flag.image = flags[indexPath.row]
+        cell.currencyName.text = currencies[indexPath.row]
+        cell.value.text = "--"
+        
+        return cell
     }
-
 }

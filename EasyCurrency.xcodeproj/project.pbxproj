@@ -13,6 +13,7 @@
 		1322CF341FFB8A48009303C9 /* TransactionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1322CF331FFB8A48009303C9 /* TransactionController.swift */; };
 		135DDB7C1FF6C78200699A66 /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 135DDB7B1FF6C78100699A66 /* LocalAuthentication.framework */; };
 		139106DF1FF2E21700FBC97C /* MapsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139106DE1FF2E21700FBC97C /* MapsItem.swift */; };
+		139AD46A201B2ADB00623F8D /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139AD469201B2ADB00623F8D /* CustomCell.swift */; };
 		13BBB8251FF3964F0099C835 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13BBB8241FF3964F0099C835 /* RegistrationViewController.swift */; };
 		13CD419D1FF93E69006F8A82 /* EasyCurrency.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 13CD41971FF93A28006F8A82 /* EasyCurrency.xcdatamodeld */; };
 		13DCE9C21FFE57F100C3ABA9 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DCE9C11FFE57F100C3ABA9 /* Reachability.swift */; };
@@ -49,6 +50,7 @@
 		1322CF331FFB8A48009303C9 /* TransactionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionController.swift; sourceTree = "<group>"; };
 		135DDB7B1FF6C78100699A66 /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
 		139106DE1FF2E21700FBC97C /* MapsItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapsItem.swift; sourceTree = "<group>"; };
+		139AD469201B2ADB00623F8D /* CustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
 		13BBB8241FF3964F0099C835 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		13CD41981FF93A28006F8A82 /* EasyCurrency.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = EasyCurrency.xcdatamodel; sourceTree = "<group>"; };
 		13DCE9C11FFE57F100C3ABA9 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 		13F8AB1B1FEFC33500E9093F /* EasyCurrency */ = {
 			isa = PBXGroup;
 			children = (
+				139AD469201B2ADB00623F8D /* CustomCell.swift */,
 				13F8AB1C1FEFC33500E9093F /* AppDelegate.swift */,
 				13F8AB1E1FEFC33500E9093F /* ViewController.swift */,
 				13BBB8241FF3964F0099C835 /* RegistrationViewController.swift */,
@@ -297,6 +300,7 @@
 			files = (
 				139106DF1FF2E21700FBC97C /* MapsItem.swift in Sources */,
 				13CD419D1FF93E69006F8A82 /* EasyCurrency.xcdatamodeld in Sources */,
+				139AD46A201B2ADB00623F8D /* CustomCell.swift in Sources */,
 				1301AD431FF4F5C500944028 /* WalletItem.swift in Sources */,
 				1301AD411FF4F5B200944028 /* ExchangeItem.swift in Sources */,
 				13F8AB1F1FEFC33500E9093F /* ViewController.swift in Sources */,
