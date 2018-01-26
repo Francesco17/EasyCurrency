@@ -12,7 +12,7 @@ class CustomCell: UITableViewCell {
 
     @IBOutlet weak var flag: UIImageView!
     @IBOutlet weak var currencyName: UILabel!
-    @IBOutlet weak var value: UILabel!
+    @IBOutlet weak var value: UITextField!
     
     override func awakeFromNib() {
         super.awakeFromNib()
