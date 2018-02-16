@@ -11,6 +11,7 @@ import QuartzCore
 
 class GraphsController: UIViewController {
     
+    var title_graph = String()
     var label = UILabel()
     var lineChart: LineChart!
     
@@ -18,13 +19,13 @@ class GraphsController: UIViewController {
         super.viewDidLoad()
         var views: [String: AnyObject] = [:]
         
-        label.text = "..."
+        label.text = title_graph
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = NSTextAlignment.center
         self.view.addSubview(label)
         views["label"] = label
         view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[label]-|", options: [], metrics: nil, views: views))
-        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-80-[label]", options: [], metrics: nil, views: views))
+        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-120-[label]", options: [], metrics: nil, views: views))
         
         // simple arrays
         let data: [CGFloat] = [3, 4, -2, 11, 13, 15]
@@ -48,7 +49,8 @@ class GraphsController: UIViewController {
         self.view.addSubview(lineChart)
         views["chart"] = lineChart
         view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[chart]-|", options: [], metrics: nil, views: views))
-        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[label]-[chart(==200)]", options: [], metrics: nil, views: views))
+        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[label]-[chart]-|", options: [], metrics: nil, views: views))
+//        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[label]-[chart(==200)]", options: [], metrics: nil, views: views))
     }
     
 

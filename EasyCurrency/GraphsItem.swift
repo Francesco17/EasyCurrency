@@ -31,6 +31,16 @@ class GraphsItem: UIViewController {
         
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "graphSegue"{
+            if let destination = segue.destination as? GraphsController{
+                let path = tableView.indexPathForSelectedRow
+                let selRow = path?.row
+                destination.title_graph = currencyCode[selRow!]                
+            }
+        }
+    }
+    
     func getRates(selCurrencyFrom: String){
         let url = URL(string: "https://api.fixer.io/latest?base="+selCurrencyFrom)
         let task = URLSession.shared.dataTask(with: url!) { (data, response, error) in
@@ -103,7 +113,7 @@ extension GraphsItem: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath)
-        tableView.deselectRow(at: indexPath, animated: true)
+//        tableView.deselectRow(at: indexPath, animated: true)
         
         performSegue(withIdentifier: "graphSegue" , sender: cell)
     }
