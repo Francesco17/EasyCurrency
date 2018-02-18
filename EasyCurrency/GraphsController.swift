@@ -100,6 +100,10 @@ class GraphsController: UIViewController {
 //        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[label]-[chart(==200)]", options: [], metrics: nil, views: views))
     }
     
+    func didSelectDataPoint(_ x: CGFloat, yValues: Array<CGFloat>) {
+        label.text = "x: \(x)     y: \(yValues)"
+    }
+    
     func getRates(selCurrencyTo: String, date: String, completion: @escaping (CGFloat)->()){
         
         var rate = CGFloat()
