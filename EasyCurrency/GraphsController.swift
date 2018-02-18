@@ -15,8 +15,12 @@ class GraphsController: UIViewController {
     var label = UILabel()
     var lineChart: LineChart!
     
+    let myGroup = DispatchGroup()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        var views: [String: AnyObject] = [:]
         
         var today = Date()
         var dateArray = [String]()
@@ -36,11 +40,36 @@ class GraphsController: UIViewController {
         dateArray.remove(at: 0)
         dateArray_2.remove(at: 0)
         
-        getRates(selCurrencyTo: title_graph, dateArray: dateArray_2) { (rates) in
-            print(rates)
+        var yRates = [CGFloat]()
+        for i in 0...dateArray_2.count-1{
+            myGroup.enter()
+            getRates(selCurrencyTo: title_graph, date: dateArray_2[i], completion: { (rate) in
+                yRates.append(rate)
+                self.myGroup.leave()
+            })
         }
         
-        var views: [String: AnyObject] = [:]
+        myGroup.notify(queue: DispatchQueue.main) {
+            print(yRates)
+//            print(type(of: yRates))
+            
+            self.lineChart = LineChart()
+            self.lineChart.animation.enabled = true
+            self.lineChart.area = false
+            self.lineChart.x.labels.visible = true
+            self.lineChart.x.grid.count = 15
+            self.lineChart.y.grid.count = 3
+            self.lineChart.x.labels.values = dateArray
+            self.lineChart.y.labels.visible = true
+            self.lineChart.addLine(yRates)
+            
+            self.lineChart.translatesAutoresizingMaskIntoConstraints = false
+            self.view.addSubview(self.lineChart)
+            views["chart"] = self.lineChart
+            self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[chart]-|", options: [], metrics: nil, views: views))
+            self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[label]-[chart]-|", options: [], metrics: nil, views: views))
+            
+        }
         
         label.text = "History conversion from EUR to "+title_graph
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -51,68 +80,59 @@ class GraphsController: UIViewController {
         view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-120-[label]", options: [], metrics: nil, views: views))
         
         // simple arrays
-        let data: [CGFloat] = [3, 4, -2, 11, 13, 15,7,7,7,7,7,6,6,6,6]
-//        let data2: [CGFloat] = [1, 3, 5, 13, 17, 20]
+//        let data: [CGFloat] = [3, 4, -2, 11, 13, 15,7,7,7,7,7,6,6,6,6]
         
-        // simple line with custom x axis labels
-//        let xLabels: [String] = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"]
-        
-        lineChart = LineChart()
-        lineChart.animation.enabled = true
-        lineChart.area = true
-        lineChart.x.labels.visible = true
-        lineChart.x.grid.count = 10
-        lineChart.y.grid.count = 10
-        lineChart.x.labels.values = dateArray
-        lineChart.y.labels.visible = true
-        lineChart.addLine(data)
-//        lineChart.addLine(data2)
-        
-        lineChart.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(lineChart)
-        views["chart"] = lineChart
-        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[chart]-|", options: [], metrics: nil, views: views))
-        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[label]-[chart]-|", options: [], metrics: nil, views: views))
+//        lineChart = LineChart()
+//        lineChart.animation.enabled = true
+//        lineChart.area = true
+//        lineChart.x.labels.visible = true
+//        lineChart.x.grid.count = 10
+//        lineChart.y.grid.count = 10
+//        lineChart.x.labels.values = dateArray
+//        lineChart.y.labels.visible = true
+//        lineChart.addLine(data)
+//
+//        lineChart.translatesAutoresizingMaskIntoConstraints = false
+//        self.view.addSubview(lineChart)
+//        views["chart"] = lineChart
+//        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[chart]-|", options: [], metrics: nil, views: views))
+//        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[label]-[chart]-|", options: [], metrics: nil, views: views))
 //        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[label]-[chart(==200)]", options: [], metrics: nil, views: views))
     }
-
     
-    func getRates(selCurrencyTo: String, dateArray: [String], completion: @escaping ([Double])->()){
-        var rates = [Double]()
-        for i in 1...dateArray.count-1{
-            let url = URL(string: "https://api.fixer.io/"+dateArray[i]+"?symbols="+selCurrencyTo)
-            print(url!)
-            let task = URLSession.shared.dataTask(with: url!) { (data, response, error) in
-                if error != nil {
-                    print("HTTP request error")
-                }
-                else{
-                    do{
-                        let json = try JSONSerialization.jsonObject(with: data!)
-                        if let dictResponse = json as? [String:Any] {
-                            if let currs = dictResponse["rates"] as? [String:Any]{
-                                if currs[selCurrencyTo] != nil {
-                                    rates.append(currs[selCurrencyTo] as! Double)
-                                }
-                                else{
-                                    rates.append(-1)
-                                }
+    func getRates(selCurrencyTo: String, date: String, completion: @escaping (CGFloat)->()){
+        
+        var rate = CGFloat()
+        let url = URL(string: "https://api.fixer.io/"+date+"?symbols="+selCurrencyTo)
+        let task = URLSession.shared.dataTask(with: url!) { (data, response, error) in
+            if error != nil {
+                print("HTTP request error")
+            }
+            else{
+                do{
+                    let json = try JSONSerialization.jsonObject(with: data!)
+                    if let dictResponse = json as? [String:Any] {
+                        if let currs = dictResponse["rates"] as? [String:Any]{
+                            if currs[selCurrencyTo] != nil {
+                                rate = currs[selCurrencyTo] as! CGFloat
                             }
                             else{
-                                print("Rate not present")
-                                rates.append(-2)
+                                rate = -1
                             }
                         }
-                    }catch {
-                        print("Error parsing Json")
+                        else{
+                            print("Rate not present")
+                            rate = -2
+                        }
                     }
+                }catch {
+                    print("Error parsing Json")
                 }
             }
-            task.resume()
+            completion(rate)
         }
-        
+        task.resume()
     }
-    
 
 
 }
