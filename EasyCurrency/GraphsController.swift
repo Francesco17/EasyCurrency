@@ -8,8 +8,9 @@
 
 import UIKit
 import QuartzCore
+import Charts
 
-class GraphsController: UIViewController {
+class GraphsController: UIViewController, ChartViewDelegate {
     
     var title_graph = String()
     var label = UILabel()
@@ -17,10 +18,17 @@ class GraphsController: UIViewController {
     
     let myGroup = DispatchGroup()
     
+    @IBOutlet weak var labelText: UILabel!
+    @IBOutlet weak var lineChartView: LineChartView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var views: [String: AnyObject] = [:]
+        self.lineChartView.delegate = self
+        self.lineChartView.noDataText = "No data provided.."
+        self.labelText.text = title_graph
+        
+//        var views: [String: AnyObject] = [:]
         
         var today = Date()
         var dateArray = [String]()
@@ -40,74 +48,84 @@ class GraphsController: UIViewController {
         dateArray.remove(at: 0)
         dateArray_2.remove(at: 0)
         
-        var yRates = [CGFloat]()
+        var int_Date = [Int]()
+        for value in dateArray {
+            int_Date.append(Int(value)!)
+        }
+        int_Date.reverse()
+        
+        var yRates = [Double]()
         for i in 0...dateArray_2.count-1{
             myGroup.enter()
             getRates(selCurrencyTo: title_graph, date: dateArray_2[i], completion: { (rate) in
-                yRates.append(rate)
+                yRates.append(Double(rate))
                 self.myGroup.leave()
             })
         }
         
         myGroup.notify(queue: DispatchQueue.main) {
+            print(int_Date)
             print(yRates)
-//            print(type(of: yRates))
+            yRates.reverse()
+            print(yRates)
             
-            self.lineChart = LineChart()
-            self.lineChart.animation.enabled = true
-            self.lineChart.area = false
-            self.lineChart.x.labels.visible = true
-            self.lineChart.x.grid.count = 15
-            self.lineChart.y.grid.count = 3
-            self.lineChart.x.labels.values = dateArray
-            self.lineChart.y.labels.visible = true
-            self.lineChart.addLine(yRates)
             
-            self.lineChart.translatesAutoresizingMaskIntoConstraints = false
-            self.view.addSubview(self.lineChart)
-            views["chart"] = self.lineChart
-            self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[chart]-|", options: [], metrics: nil, views: views))
-            self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[label]-[chart]-|", options: [], metrics: nil, views: views))
+            self.setChartData(xLabel: int_Date, yLabel: yRates)
+
+            
+//            self.lineChart = LineChart()
+//            self.lineChart.animation.enabled = true
+//            self.lineChart.area = false
+//            self.lineChart.x.labels.visible = true
+//            self.lineChart.x.grid.count = 15
+//            self.lineChart.y.grid.count = 3
+//            self.lineChart.x.labels.values = dateArray
+//            self.lineChart.y.labels.visible = true
+//            self.lineChart.addLine(yRates)
+//
+//            self.lineChart.translatesAutoresizingMaskIntoConstraints = false
+//            self.view.addSubview(self.lineChart)
+//            views["chart"] = self.lineChart
+//            self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[chart]-|", options: [], metrics: nil, views: views))
+//            self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[label]-[chart]-|", options: [], metrics: nil, views: views))
             
         }
         
-        label.text = "History conversion from EUR to "+title_graph
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textAlignment = NSTextAlignment.center
-        self.view.addSubview(label)
-        views["label"] = label
-        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[label]-|", options: [], metrics: nil, views: views))
-        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-120-[label]", options: [], metrics: nil, views: views))
+//        label.text = "History conversion from EUR to "+title_graph
+//        label.translatesAutoresizingMaskIntoConstraints = false
+//        label.textAlignment = NSTextAlignment.center
+//        self.view.addSubview(label)
+//        views["label"] = label
+//        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[label]-|", options: [], metrics: nil, views: views))
+//        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-120-[label]", options: [], metrics: nil, views: views))
         
-        // simple arrays
-//        let data: [CGFloat] = [3, 4, -2, 11, 13, 15,7,7,7,7,7,6,6,6,6]
-        
-//        lineChart = LineChart()
-//        lineChart.animation.enabled = true
-//        lineChart.area = true
-//        lineChart.x.labels.visible = true
-//        lineChart.x.grid.count = 10
-//        lineChart.y.grid.count = 10
-//        lineChart.x.labels.values = dateArray
-//        lineChart.y.labels.visible = true
-//        lineChart.addLine(data)
-//
-//        lineChart.translatesAutoresizingMaskIntoConstraints = false
-//        self.view.addSubview(lineChart)
-//        views["chart"] = lineChart
-//        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[chart]-|", options: [], metrics: nil, views: views))
-//        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[label]-[chart]-|", options: [], metrics: nil, views: views))
-//        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[label]-[chart(==200)]", options: [], metrics: nil, views: views))
+
     }
     
-    func didSelectDataPoint(_ x: CGFloat, yValues: Array<CGFloat>) {
-        label.text = "x: \(x)     y: \(yValues)"
+    func setChartData(xLabel: [Int], yLabel: [Double]){
+        
+        let values = (0..<15).map { (i) -> ChartDataEntry in
+            return ChartDataEntry(x: Double(xLabel[i]), y: yLabel[i])
+        }
+
+//        let values = (0..<15).map { (i) -> ChartDataEntry in
+//            let val = Double(arc4random_uniform(UInt32(15)) + 3)
+//            return ChartDataEntry(x: Double(i), y: val)
+//        }
+
+        let set1 = LineChartDataSet(values: values, label: "DataSet")
+        let data = LineChartData(dataSet: set1)
+
+        self.lineChartView.data = data
+
     }
+    
     
     func getRates(selCurrencyTo: String, date: String, completion: @escaping (CGFloat)->()){
         
         var rate = CGFloat()
         let url = URL(string: "https://api.fixer.io/"+date+"?symbols="+selCurrencyTo)
+        print(url!)
         let task = URLSession.shared.dataTask(with: url!) { (data, response, error) in
             if error != nil {
                 print("HTTP request error")
@@ -116,6 +134,7 @@ class GraphsController: UIViewController {
                 do{
                     let json = try JSONSerialization.jsonObject(with: data!)
                     if let dictResponse = json as? [String:Any] {
+                        print(dictResponse)
                         if let currs = dictResponse["rates"] as? [String:Any]{
                             if currs[selCurrencyTo] != nil {
                                 rate = currs[selCurrencyTo] as! CGFloat

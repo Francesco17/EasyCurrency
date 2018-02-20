@@ -530,13 +530,39 @@
                     <view key="view" contentMode="scaleToFill" id="apw-lF-pGV">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VaT-NU-SvP">
+                                <rect key="frame" x="45" y="136" width="285" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VyY-ol-j9v" customClass="LineChartView" customModule="Charts">
+                                <rect key="frame" x="16" y="182" width="343" height="416"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="qp9-7g-dp9" firstAttribute="trailing" secondItem="VaT-NU-SvP" secondAttribute="trailing" constant="45" id="5RH-0E-Hib"/>
+                            <constraint firstItem="VyY-ol-j9v" firstAttribute="top" secondItem="VaT-NU-SvP" secondAttribute="bottom" constant="25" id="Hhu-di-Shm"/>
+                            <constraint firstItem="VyY-ol-j9v" firstAttribute="leading" secondItem="qp9-7g-dp9" secondAttribute="leading" constant="16" id="XMZ-Tj-dHK"/>
+                            <constraint firstItem="VaT-NU-SvP" firstAttribute="top" secondItem="qp9-7g-dp9" secondAttribute="top" constant="20" id="ZGq-mU-Zus"/>
+                            <constraint firstItem="qp9-7g-dp9" firstAttribute="trailing" secondItem="VyY-ol-j9v" secondAttribute="trailing" constant="16" id="hGR-b2-H5D"/>
+                            <constraint firstItem="qp9-7g-dp9" firstAttribute="bottom" secondItem="VyY-ol-j9v" secondAttribute="bottom" constant="20" id="hkm-HA-pI4"/>
+                            <constraint firstItem="VaT-NU-SvP" firstAttribute="leading" secondItem="qp9-7g-dp9" secondAttribute="leading" constant="45" id="iwG-ck-v6U"/>
+                            <constraint firstItem="VyY-ol-j9v" firstAttribute="top" secondItem="VaT-NU-SvP" secondAttribute="bottom" constant="25" id="vtb-sv-FpT"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="qp9-7g-dp9"/>
                     </view>
+                    <connections>
+                        <outlet property="labelText" destination="VaT-NU-SvP" id="3Ia-6a-5hk"/>
+                        <outlet property="lineChartView" destination="VyY-ol-j9v" id="nvQ-4h-vRG"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7QL-cn-CWu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4158" y="680"/>
+            <point key="canvasLocation" x="4157.6000000000004" y="679.61019490254876"/>
         </scene>
         <!--Transaction Controller-->
         <scene sceneID="7uX-US-Nch">
