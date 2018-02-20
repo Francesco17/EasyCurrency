@@ -26,7 +26,7 @@ class GraphsController: UIViewController, ChartViewDelegate {
         
         self.lineChartView.delegate = self
         self.lineChartView.noDataText = "No data provided.."
-        self.labelText.text = title_graph
+        self.labelText.text = "History conversion from EUR to "+title_graph
         
 //        var views: [String: AnyObject] = [:]
         
@@ -64,11 +64,7 @@ class GraphsController: UIViewController, ChartViewDelegate {
         }
         
         myGroup.notify(queue: DispatchQueue.main) {
-            print(int_Date)
-            print(yRates)
             yRates.reverse()
-            print(yRates)
-            
             
             self.setChartData(xLabel: int_Date, yLabel: yRates)
 
@@ -108,11 +104,6 @@ class GraphsController: UIViewController, ChartViewDelegate {
             return ChartDataEntry(x: Double(xLabel[i]), y: yLabel[i])
         }
 
-//        let values = (0..<15).map { (i) -> ChartDataEntry in
-//            let val = Double(arc4random_uniform(UInt32(15)) + 3)
-//            return ChartDataEntry(x: Double(i), y: val)
-//        }
-
         let set1 = LineChartDataSet(values: values, label: "DataSet")
         let data = LineChartData(dataSet: set1)
 
@@ -125,7 +116,6 @@ class GraphsController: UIViewController, ChartViewDelegate {
         
         var rate = CGFloat()
         let url = URL(string: "https://api.fixer.io/"+date+"?symbols="+selCurrencyTo)
-        print(url!)
         let task = URLSession.shared.dataTask(with: url!) { (data, response, error) in
             if error != nil {
                 print("HTTP request error")
@@ -134,7 +124,6 @@ class GraphsController: UIViewController, ChartViewDelegate {
                 do{
                     let json = try JSONSerialization.jsonObject(with: data!)
                     if let dictResponse = json as? [String:Any] {
-                        print(dictResponse)
                         if let currs = dictResponse["rates"] as? [String:Any]{
                             if currs[selCurrencyTo] != nil {
                                 rate = currs[selCurrencyTo] as! CGFloat
